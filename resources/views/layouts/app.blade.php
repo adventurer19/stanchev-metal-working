@@ -43,30 +43,31 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu-overlay" class="hidden md:hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 transition-opacity duration-300"></div>
-        
-        <!-- Mobile Menu Sidebar -->
-        <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 h-full w-64 bg-slate-900/95 backdrop-blur-xl border-r border-slate-800/50 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
-            <div class="flex flex-col h-full">
-                <div class="flex items-center justify-between p-4 border-b border-slate-800/50">
-                    <span class="text-lg font-bold text-white">Меню</span>
-                    <button id="mobile-menu-close" class="p-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
-                <div class="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
-                    <a href="{{ route('home') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Начало') }}</a>
-                    <a href="{{ route('about') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('За нас') }}</a>
-                    <a href="{{ route('portfolio') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Портфолио') }}</a>
-                    <a href="{{ route('why-us') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Защо ние') }}</a>
-                    <a href="{{ route('contact') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Контакти') }}</a>
-                </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="hidden md:hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 transition-opacity duration-300"></div>
+    
+    <!-- Mobile Menu Sidebar -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 h-full w-64 bg-slate-900/95 backdrop-blur-xl border-r border-slate-800/50 z-50" style="left: 0; right: auto; transform: translateX(-100%); transition: transform 0.3s ease-in-out; will-change: transform;">
+        <div class="flex flex-col h-full">
+            <div class="flex items-center justify-between p-4 border-b border-slate-800/50">
+                <span class="text-lg font-bold text-white">Меню</span>
+                <button id="mobile-menu-close" class="p-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
+                <a href="{{ route('home') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Начало') }}</a>
+                <a href="{{ route('about') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('За нас') }}</a>
+                <a href="{{ route('portfolio') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Портфолио') }}</a>
+                <a href="{{ route('why-us') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Защо ние') }}</a>
+                <a href="{{ route('contact') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Контакти') }}</a>
             </div>
         </div>
-    </nav>
+    </div>
 
     <!-- Main Content -->
     <main class="pt-20">
@@ -150,21 +151,30 @@
         const mobileMenuClose = document.getElementById('mobile-menu-close');
         
         function openMobileMenu() {
+            if (!mobileMenu || !mobileMenuOverlay) return;
+            
+            // Ensure menu is positioned from left
+            mobileMenu.style.left = '0';
+            mobileMenu.style.right = 'auto';
+            mobileMenu.style.transform = 'translateX(-100%)';
+            
             mobileMenu.classList.remove('hidden');
             mobileMenuOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent body scroll
+            
             // Force reflow to ensure transition works
-            setTimeout(() => {
-                mobileMenu.classList.remove('-translate-x-full');
-                mobileMenu.classList.add('translate-x-0');
-                document.body.style.overflow = 'hidden'; // Prevent body scroll
-            }, 10);
+            requestAnimationFrame(() => {
+                mobileMenu.style.transform = 'translateX(0)';
+            });
         }
         
         function closeMobileMenu() {
-            mobileMenu.classList.remove('translate-x-0');
-            mobileMenu.classList.add('-translate-x-full');
+            if (!mobileMenu || !mobileMenuOverlay) return;
+            
+            mobileMenu.style.transform = 'translateX(-100%)';
             mobileMenuOverlay.classList.add('hidden');
             document.body.style.overflow = ''; // Restore body scroll
+            
             setTimeout(() => {
                 mobileMenu.classList.add('hidden');
             }, 300);
