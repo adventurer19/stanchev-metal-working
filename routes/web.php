@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 Route::get('/locale/{locale}', function ($locale) {
     if (in_array($locale, ['bg', 'en'])) {
@@ -39,7 +41,45 @@ Route::get('/contact', function () {
 
 // Contact form submission
 Route::post('/contact', function (\Illuminate\Http\Request $request) {
-    // TODO: Implement email sending
-    return redirect()->route('contact')->with('success', __('Съобщението е изпратено успешно!'));
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'phone' => 'nullable|string|max:255',
+        'message' => 'required|string|max:2000',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->route('contact')
+            ->withErrors($validator)
+            ->withInput();
+    }
+
+    try {
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone ?? __('Не е посочен'),
+            'message' => $request->message,
+        ];
+
+        // Изпращане на имейл
+        Mail::raw(
+            __('Ново съобщение от контактната форма') . "\n\n" .
+            __('Име') . ": {$data['name']}\n" .
+            __('Имейл') . ": {$data['email']}\n" .
+            __('Телефон') . ": {$data['phone']}\n\n" .
+            __('Съобщение') . ":\n{$data['message']}",
+            function ($message) use ($data) {
+                $message->to('stanchev_sin2025@abv.bg')
+                    ->subject(__('Ново съобщение от') . ' ' . $data['name'])
+                    ->replyTo($data['email'], $data['name']);
+            }
+        );
+
+        return redirect()->route('contact')->with('success', __('Съобщението е изпратено успешно!'));
+    } catch (\Exception $e) {
+        return redirect()->route('contact')
+            ->with('error', __('Възникна грешка при изпращането. Моля, опитайте отново.'));
+    }
 })->name('contact.submit');
 

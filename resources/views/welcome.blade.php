@@ -18,18 +18,18 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="#home" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Начало') }}</a>
-                    <a href="#craft" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('За нас') }}</a>
-                    <a href="#portfolio" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Портфолио') }}</a>
-                    <a href="#why-us" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Защо ние') }}</a>
-                    <a href="#contact" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Контакти') }}</a>
+                    <a href="#home" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Начало') }}</a>
+                    <a href="#craft" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('За нас') }}</a>
+                    <a href="#portfolio" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Портфолио') }}</a>
+                    <a href="#why-us" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Защо ние') }}</a>
+                    <a href="#contact" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Контакти') }}</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-1 bg-slate-900/50 rounded-lg p-1 border border-slate-800">
-                        <a href="{{ route('locale', 'bg') }}" class="px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-300 {{ app()->getLocale() === 'bg' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">БГ</a>
-                        <a href="{{ route('locale', 'en') }}" class="px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-300 {{ app()->getLocale() === 'en' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">EN</a>
+                    <div class="flex items-center space-x-1 bg-slate-900/50 rounded-sm p-1 border border-slate-800">
+                        <a href="{{ route('locale', 'bg') }}" class="px-3 py-1.5 text-xs font-medium rounded-sm transition-all duration-300 {{ app()->getLocale() === 'bg' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">БГ</a>
+                        <a href="{{ route('locale', 'en') }}" class="px-3 py-1.5 text-xs font-medium rounded-sm transition-all duration-300 {{ app()->getLocale() === 'en' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">EN</a>
                     </div>
-                    <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">
+                    <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
@@ -39,11 +39,11 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden glass border-t border-slate-800/50">
             <div class="px-4 py-4 space-y-2">
-                <a href="#home" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Начало') }}</a>
-                <a href="#craft" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('За нас') }}</a>
-                <a href="#portfolio" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Портфолио') }}</a>
-                <a href="#why-us" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Защо ние') }}</a>
-                <a href="#contact" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Контакти') }}</a>
+                <a href="#home" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Начало') }}</a>
+                <a href="#craft" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('За нас') }}</a>
+                <a href="#portfolio" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Портфолио') }}</a>
+                <a href="#why-us" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Защо ние') }}</a>
+                <a href="#contact" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Контакти') }}</a>
             </div>
         </div>
     </nav>
@@ -64,7 +64,7 @@
             <div class="absolute inset-0 bg-gradient-radial"></div>
         </div>
         <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto animate-fade-in">
-            <div class="inline-block mb-6 px-4 py-2 bg-accent-500/10 border border-accent-500/20 rounded-full">
+            <div class="inline-block mb-6 px-4 py-2 bg-accent-500/10 border border-accent-500/20 rounded-sm">
                 <span class="text-sm font-semibold text-accent-400">{{ __('От 2007 година') }}</span>
             </div>
             <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-white leading-tight text-shadow-lg">
@@ -106,7 +106,7 @@
                 <div class="space-y-6">
                     <div class="card card-hover">
                         <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-accent-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <div class="w-12 h-12 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
                                 <svg class="w-6 h-6 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
@@ -121,7 +121,7 @@
                     </div>
                     <div class="card card-hover">
                         <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-accent-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <div class="w-12 h-12 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
                                 <svg class="w-6 h-6 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                 </svg>
@@ -136,7 +136,7 @@
                     </div>
                     <div class="card card-hover">
                         <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-accent-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <div class="w-12 h-12 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
                                 <svg class="w-6 h-6 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                                 </svg>
@@ -160,7 +160,7 @@
                         ], 0, 4);
                     @endphp
                     @foreach($craftImages as $index => $img)
-                        <div class="{{ $index === 0 ? 'col-span-2' : '' }} group relative overflow-hidden rounded-xl border border-slate-800/50 hover:border-accent-500/50 transition-all duration-500">
+                        <div class="{{ $index === 0 ? 'col-span-2' : '' }} group relative overflow-hidden rounded-sm border border-slate-800/50 hover:border-accent-500/50 transition-all duration-500">
                             <div class="aspect-square overflow-hidden">
                                 <img src="{{ asset('images/' . $img) }}" alt="Craft {{ $index + 1 }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                             </div>
@@ -213,7 +213,7 @@
                     ];
                 @endphp
                 @foreach($portfolioImages as $index => $img)
-                    <div class="group relative overflow-hidden rounded-xl border border-slate-800/50 bg-slate-900/50 cursor-pointer transform transition-all duration-500 hover:scale-[1.02] hover:border-accent-500/50 hover:shadow-2xl hover:shadow-accent-500/20">
+                    <div class="group relative overflow-hidden rounded-sm border border-slate-800/50 bg-slate-900/50 cursor-pointer transform transition-all duration-500 hover:scale-[1.02] hover:border-accent-500/50 hover:shadow-2xl hover:shadow-accent-500/20">
                         <div class="aspect-square overflow-hidden">
                             <img src="{{ asset('images/' . $img) }}" alt="Project {{ $index + 1 }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         </div>
@@ -243,7 +243,7 @@
             </div>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="card card-hover text-center">
-                    <div class="w-20 h-20 bg-accent-500/20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <div class="w-20 h-20 bg-accent-500/20 rounded-sm flex items-center justify-center mb-6 mx-auto">
                         <svg class="w-10 h-10 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
@@ -254,7 +254,7 @@
                     </p>
                 </div>
                 <div class="card card-hover text-center">
-                    <div class="w-20 h-20 bg-accent-500/20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <div class="w-20 h-20 bg-accent-500/20 rounded-sm flex items-center justify-center mb-6 mx-auto">
                         <svg class="w-10 h-10 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -266,7 +266,7 @@
                     </p>
                 </div>
                 <div class="card card-hover text-center">
-                    <div class="w-20 h-20 bg-accent-500/20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <div class="w-20 h-20 bg-accent-500/20 rounded-sm flex items-center justify-center mb-6 mx-auto">
                         <svg class="w-10 h-10 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
@@ -299,22 +299,22 @@
                         <div>
                             <label for="name" class="block text-sm font-semibold text-slate-300 mb-2">{{ __('Име') }}</label>
                             <input type="text" id="name" name="name" required 
-                                   class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
+                                   class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-semibold text-slate-300 mb-2">{{ __('Имейл') }}</label>
                             <input type="email" id="email" name="email" required 
-                                   class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
+                                   class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
                         </div>
                         <div>
                             <label for="phone" class="block text-sm font-semibold text-slate-300 mb-2">{{ __('Телефон') }}</label>
                             <input type="tel" id="phone" name="phone" 
-                                   class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
+                                   class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
                         </div>
                         <div>
                             <label for="message" class="block text-sm font-semibold text-slate-300 mb-2">{{ __('Съобщение') }}</label>
                             <textarea id="message" name="message" rows="5" required 
-                                      class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300 resize-none"></textarea>
+                                      class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300 resize-none"></textarea>
                         </div>
                         <button type="submit" class="w-full btn-primary">
                             {{ __('Изпрати съобщение') }}
@@ -326,7 +326,7 @@
                         <h3 class="text-2xl font-bold text-white mb-8">{{ __('Контактна информация') }}</h3>
                         <div class="space-y-6">
                             <div class="flex items-start space-x-4">
-                                <div class="w-14 h-14 bg-accent-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <div class="w-14 h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
                                     <svg class="w-7 h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -338,7 +338,7 @@
                                 </div>
                             </div>
                             <div class="flex items-start space-x-4">
-                                <div class="w-14 h-14 bg-accent-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <div class="w-14 h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
                                     <svg class="w-7 h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                                     </svg>
@@ -349,7 +349,7 @@
                                 </div>
                             </div>
                             <div class="flex items-start space-x-4">
-                                <div class="w-14 h-14 bg-accent-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <div class="w-14 h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
                                     <svg class="w-7 h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                     </svg>

@@ -25,22 +25,22 @@
     }
     
     .card {
-        @apply bg-slate-900/50 backdrop-blur-sm border border-slate-800/50 rounded-xl p-6 transition-all duration-300;
+        @apply bg-slate-900/50 backdrop-blur-sm border border-slate-800/50 rounded-sm p-6 transition-all duration-300;
     }
     
     .card-hover {
-        @apply hover:border-accent-500/50 hover:bg-slate-900/70 hover:shadow-xl hover:shadow-accent-500/10;
+        @apply hover:border-accent-500/50 hover:bg-slate-900/70 hover:shadow-xl hover:shadow-accent-500/20;
     }
     
     .btn-primary {
-        @apply px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-lg 
+        @apply px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-sm 
                hover:from-accent-600 hover:to-accent-700 transition-all duration-300 
-               transform hover:scale-105 shadow-lg shadow-accent-500/30 
-               active:scale-95;
+               transform hover:scale-[1.02] shadow-lg shadow-accent-500/30 
+               active:scale-[0.98] border border-accent-600/50;
     }
     
     .btn-secondary {
-        @apply px-6 py-3 bg-slate-800/50 border border-slate-700 text-slate-200 font-semibold rounded-lg 
+        @apply px-6 py-3 bg-slate-800/50 border border-slate-700 text-slate-200 font-semibold rounded-sm 
                hover:bg-slate-800 hover:border-slate-600 transition-all duration-300;
     }
     
@@ -71,11 +71,42 @@
     }
     
     .bg-gradient-radial {
-        background: radial-gradient(circle at center, rgba(249, 115, 22, 0.1) 0%, transparent 70%);
+        background: radial-gradient(circle at center, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
     }
     
     .scroll-smooth {
         scroll-behavior: smooth;
+    }
+    
+    /* Cookie banner animations */
+    @keyframes slideDown {
+        from {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideUp {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    .cookie-slide-down {
+        animation: slideDown 0.5s ease-out;
+    }
+    
+    .cookie-slide-up {
+        animation: slideUp 0.5s ease-out;
     }
 }
 

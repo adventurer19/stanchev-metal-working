@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ __('Прецизна металообработка и индустриални решения в България') }}">
     <title>@yield('title', __('Станчев и Син 2025 ЕООД - Прецизна металообработка'))</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon-optimized.svg') }}">
+    <link rel="alternate icon" href="{{ asset('favicon-optimized.svg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon-optimized.svg') }}">
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="antialiased bg-slate-950 text-slate-100">
@@ -18,18 +24,18 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="{{ route('home') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-lg transition-all duration-300">{{ __('Начало') }}</a>
-                    <a href="{{ route('about') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('about') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-lg transition-all duration-300">{{ __('За нас') }}</a>
-                    <a href="{{ route('portfolio') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('portfolio') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-lg transition-all duration-300">{{ __('Портфолио') }}</a>
-                    <a href="{{ route('why-us') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('why-us') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-lg transition-all duration-300">{{ __('Защо ние') }}</a>
-                    <a href="{{ route('contact') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('contact') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-lg transition-all duration-300">{{ __('Контакти') }}</a>
+                    <a href="{{ route('home') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-sm transition-all duration-300">{{ __('Начало') }}</a>
+                    <a href="{{ route('about') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('about') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-sm transition-all duration-300">{{ __('За нас') }}</a>
+                    <a href="{{ route('portfolio') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('portfolio') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-sm transition-all duration-300">{{ __('Портфолио') }}</a>
+                    <a href="{{ route('why-us') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('why-us') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-sm transition-all duration-300">{{ __('Защо ние') }}</a>
+                    <a href="{{ route('contact') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('contact') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-sm transition-all duration-300">{{ __('Контакти') }}</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-1 bg-slate-900/50 rounded-lg p-1 border border-slate-800">
-                        <a href="{{ route('locale', 'bg') }}" class="px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-300 {{ app()->getLocale() === 'bg' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">БГ</a>
-                        <a href="{{ route('locale', 'en') }}" class="px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-300 {{ app()->getLocale() === 'en' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">EN</a>
+                    <div class="flex items-center space-x-1 bg-slate-900/50 rounded-sm p-1 border border-slate-800">
+                        <a href="{{ route('locale', 'bg') }}" class="px-3 py-1.5 text-xs font-medium rounded-sm transition-all duration-300 {{ app()->getLocale() === 'bg' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">БГ</a>
+                        <a href="{{ route('locale', 'en') }}" class="px-3 py-1.5 text-xs font-medium rounded-sm transition-all duration-300 {{ app()->getLocale() === 'en' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">EN</a>
                     </div>
-                    <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">
+                    <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
@@ -39,11 +45,11 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden glass border-t border-slate-800/50">
             <div class="px-4 py-4 space-y-2">
-                <a href="{{ route('home') }}" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Начало') }}</a>
-                <a href="{{ route('about') }}" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('За нас') }}</a>
-                <a href="{{ route('portfolio') }}" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Портфолио') }}</a>
-                <a href="{{ route('why-us') }}" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Защо ние') }}</a>
-                <a href="{{ route('contact') }}" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-300">{{ __('Контакти') }}</a>
+                <a href="{{ route('home') }}" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Начало') }}</a>
+                <a href="{{ route('about') }}" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('За нас') }}</a>
+                <a href="{{ route('portfolio') }}" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Портфолио') }}</a>
+                <a href="{{ route('why-us') }}" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Защо ние') }}</a>
+                <a href="{{ route('contact') }}" class="block px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Контакти') }}</a>
             </div>
         </div>
     </nav>
@@ -52,6 +58,35 @@
     <main class="pt-20">
         @yield('content')
     </main>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="hidden fixed left-0 right-0 z-40 transition-all duration-500 ease-in-out top-20 md:top-auto md:bottom-0">
+        <div class="glass border-t md:border-t-0 md:border-b border-slate-800/50 shadow-2xl">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3 mb-2">
+                            <svg class="w-5 h-5 text-accent-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                            </svg>
+                            <h3 class="text-sm font-semibold text-white">{{ __('Използваме бисквитки') }}</h3>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            {{ __('Този сайт използва бисквитки, за да подобри вашето потребителско изживяване. Като продължавате да използвате сайта, вие се съгласявате с използването на бисквитки.') }}
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 flex-shrink-0">
+                        <button id="cookie-decline" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white bg-slate-800/50 hover:bg-slate-800 border border-slate-700 rounded-sm transition-all duration-300">
+                            {{ __('Отказ') }}
+                        </button>
+                        <button id="cookie-accept" class="px-6 py-2 text-sm font-semibold text-white bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 rounded-sm transition-all duration-300 transform hover:scale-[1.02] shadow-lg shadow-accent-500/30 active:scale-[0.98] border border-accent-600/50">
+                            {{ __('Приемам') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-slate-950 border-t border-slate-800/50 py-12 mt-20">
@@ -135,6 +170,54 @@
         document.querySelectorAll('.card, section > div').forEach(el => {
             observer.observe(el);
         });
+
+        // Cookie Consent
+        const cookieConsent = document.getElementById('cookie-consent');
+        const cookieAccept = document.getElementById('cookie-accept');
+        const cookieDecline = document.getElementById('cookie-decline');
+        
+        if (cookieConsent && cookieAccept && cookieDecline) {
+            // Check if user has already made a choice
+            const cookieConsentGiven = localStorage.getItem('cookieConsent');
+            
+            if (!cookieConsentGiven) {
+                // Show cookie banner after a short delay
+                setTimeout(() => {
+                    cookieConsent.classList.remove('hidden');
+                    // Add animation class based on screen size
+                    if (window.innerWidth >= 768) {
+                        cookieConsent.classList.add('cookie-slide-up');
+                    } else {
+                        cookieConsent.classList.add('cookie-slide-down');
+                    }
+                }, 1000);
+            }
+            
+            // Handle accept
+            cookieAccept.addEventListener('click', function() {
+                localStorage.setItem('cookieConsent', 'accepted');
+                hideCookieBanner();
+            });
+            
+            // Handle decline
+            cookieDecline.addEventListener('click', function() {
+                localStorage.setItem('cookieConsent', 'declined');
+                hideCookieBanner();
+            });
+            
+            function hideCookieBanner() {
+                if (window.innerWidth >= 768) {
+                    cookieConsent.style.transform = 'translateY(100%)';
+                } else {
+                    cookieConsent.style.transform = 'translateY(-100%)';
+                }
+                cookieConsent.style.opacity = '0';
+                cookieConsent.style.transition = 'all 0.5s ease-in-out';
+                setTimeout(() => {
+                    cookieConsent.classList.add('hidden');
+                }, 500);
+            }
+        }
     </script>
 </body>
 </html>

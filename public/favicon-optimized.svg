@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="favGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Dark background -->
+  <rect width="32" height="32" rx="6" fill="#0f172a"/>
+  
+  <!-- Simplified gear icon optimized for small sizes -->
+  <g transform="translate(16, 16)">
+    <!-- Outer circle -->
+    <circle cx="0" cy="0" r="10" fill="none" stroke="url(#favGrad)" stroke-width="1.5"/>
+    
+    <!-- Gear teeth - 8 teeth for clarity at small size -->
+    <rect x="-0.8" y="-11" width="1.6" height="3" fill="url(#favGrad)" transform="rotate(0)"/>
+    <rect x="-0.8" y="-11" width="1.6" height="3" fill="url(#favGrad)" transform="rotate(45)"/>
+    <rect x="-0.8" y="-11" width="1.6" height="3" fill="url(#favGrad)" transform="rotate(90)"/>
+    <rect x="-0.8" y="-11" width="1.6" height="3" fill="url(#favGrad)" transform="rotate(135)"/>
+    <rect x="-0.8" y="-11" width="1.6" height="3" fill="url(#favGrad)" transform="rotate(180)"/>
+    <rect x="-0.8" y="-11" width="1.6" height="3" fill="url(#favGrad)" transform="rotate(225)"/>
+    <rect x="-0.8" y="-11" width="1.6" height="3" fill="url(#favGrad)" transform="rotate(270)"/>
+    <rect x="-0.8" y="-11" width="1.6" height="3" fill="url(#favGrad)" transform="rotate(315)"/>
+    
+    <!-- Center -->
+    <circle cx="0" cy="0" r="3" fill="#0f172a"/>
+    <circle cx="0" cy="0" r="2" fill="url(#favGrad)"/>
+  </g>
+</svg>
+

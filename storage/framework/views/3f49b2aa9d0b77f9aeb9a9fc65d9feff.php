@@ -3,7 +3,11 @@
 <?php $__env->startSection('content'); ?>
 <!-- Hero Section -->
 <section class="relative py-32 bg-slate-950 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950"></div>
+        <img src="<?php echo e(asset('metalworking-images/contact-us-img.jpg')); ?>" alt="<?php echo e(__('Контакти')); ?>" class="w-full h-full object-cover opacity-20">
+        <div class="absolute inset-0 bg-gradient-radial"></div>
+    </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-16">
             <h1 class="section-title">
@@ -26,32 +30,47 @@
             <div class="card">
                 <h2 class="text-3xl font-bold text-white mb-8"><?php echo e(__('Изпратете ни съобщение')); ?></h2>
                 <?php if(session('success')): ?>
-                    <div class="mb-6 p-4 bg-accent-500/20 border border-accent-500/50 rounded-lg text-accent-400">
+                    <div class="mb-6 p-4 bg-accent-500/20 border border-accent-500/50 rounded-sm text-accent-400">
                         <?php echo e(session('success')); ?>
 
+                    </div>
+                <?php endif; ?>
+                <?php if(session('error')): ?>
+                    <div class="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-sm text-red-400">
+                        <?php echo e(session('error')); ?>
+
+                    </div>
+                <?php endif; ?>
+                <?php if($errors->any()): ?>
+                    <div class="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-sm text-red-400">
+                        <ul class="list-disc list-inside space-y-1">
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </ul>
                     </div>
                 <?php endif; ?>
                 <form action="<?php echo e(route('contact.submit')); ?>" method="POST" class="space-y-6">
                     <?php echo csrf_field(); ?>
                     <div>
                         <label for="name" class="block text-sm font-semibold text-slate-300 mb-2"><?php echo e(__('Име')); ?></label>
-                        <input type="text" id="name" name="name" required 
-                               class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
+                        <input type="text" id="name" name="name" value="<?php echo e(old('name')); ?>" required 
+                               class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
                     </div>
                     <div>
                         <label for="email" class="block text-sm font-semibold text-slate-300 mb-2"><?php echo e(__('Имейл')); ?></label>
-                        <input type="email" id="email" name="email" required 
-                               class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
+                        <input type="email" id="email" name="email" value="<?php echo e(old('email')); ?>" required 
+                               class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
                     </div>
                     <div>
                         <label for="phone" class="block text-sm font-semibold text-slate-300 mb-2"><?php echo e(__('Телефон')); ?></label>
-                        <input type="tel" id="phone" name="phone" 
-                               class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
+                        <input type="tel" id="phone" name="phone" value="<?php echo e(old('phone')); ?>" 
+                               class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300">
                     </div>
                     <div>
                         <label for="message" class="block text-sm font-semibold text-slate-300 mb-2"><?php echo e(__('Съобщение')); ?></label>
                         <textarea id="message" name="message" rows="5" required 
-                                  class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300 resize-none"></textarea>
+                                  class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300 resize-none"><?php echo e(old('message')); ?></textarea>
                     </div>
                     <button type="submit" class="w-full btn-primary">
                         <?php echo e(__('Изпрати съобщение')); ?>
@@ -64,7 +83,7 @@
                     <h3 class="text-2xl font-bold text-white mb-8"><?php echo e(__('Контактна информация')); ?></h3>
                     <div class="space-y-6">
                         <div class="flex items-start space-x-4">
-                            <div class="w-14 h-14 bg-accent-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <div class="w-14 h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
                                 <svg class="w-7 h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -76,7 +95,7 @@
                             </div>
                         </div>
                         <div class="flex items-start space-x-4">
-                            <div class="w-14 h-14 bg-accent-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <div class="w-14 h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
                                 <svg class="w-7 h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                                 </svg>
@@ -87,7 +106,7 @@
                             </div>
                         </div>
                         <div class="flex items-start space-x-4">
-                            <div class="w-14 h-14 bg-accent-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <div class="w-14 h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
                                 <svg class="w-7 h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
@@ -126,7 +145,7 @@
                     <h3 class="text-2xl font-bold text-white mb-2"><?php echo e(__('Нашето местоположение')); ?></h3>
                     <p class="text-slate-400"><?php echo e(__('Столетов 162, Габрово')); ?></p>
                 </div>
-                <div class="relative w-full h-96 rounded-b-xl overflow-hidden bg-slate-800 group">
+                <div class="relative w-full h-96 rounded-b-sm overflow-hidden bg-slate-800 group">
                     <!-- Google Maps iframe -->
                     <iframe 
                         src="https://www.google.com/maps?q=Столетов+162,+Габрово,+България&output=embed&hl=<?php echo e(app()->getLocale() === 'bg' ? 'bg' : 'en'); ?>&zoom=15"
@@ -138,9 +157,9 @@
                         referrerpolicy="no-referrer-when-downgrade"
                         class="w-full h-full">
                     </iframe>
-                    <div class="absolute inset-0 pointer-events-none border border-slate-800/50 rounded-b-xl"></div>
+                    <div class="absolute inset-0 pointer-events-none border border-slate-800/50 rounded-b-sm"></div>
                     <!-- Hover overlay with link -->
-                    <div class="absolute inset-0 flex items-center justify-center bg-slate-900/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-xl">
+                    <div class="absolute inset-0 flex items-center justify-center bg-slate-900/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-sm">
                         <a href="https://www.google.com/maps/search/?api=1&query=Столетов+162,+Габрово,+България" 
                            target="_blank" 
                            rel="noopener noreferrer"
