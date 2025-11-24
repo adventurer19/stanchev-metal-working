@@ -1,0 +1,21 @@
+[2025-11-24 13:16:06] production.ERROR: file_get_contents(/Users/nikolay/shami/metalworking/.env): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_get_contents(/Users/nikolay/shami/metalworking/.env): Failed to open stream: No such file or directory at /Users/nikolay/shami/metalworking/vendor/laravel/sail/src/Console/Concerns/InteractsWithDockerComposeServices.php:138)
+[stacktrace]
+#0 /Users/nikolay/shami/metalworking/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_get_conten...', '/Users/nikolay/...', 138)
+#1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}(2, 'file_get_conten...', '/Users/nikolay/...', 138)
+#2 /Users/nikolay/shami/metalworking/vendor/laravel/sail/src/Console/Concerns/InteractsWithDockerComposeServices.php(138): file_get_contents('/Users/nikolay/...')
+#3 /Users/nikolay/shami/metalworking/vendor/laravel/sail/src/Console/InstallCommand.php(54): Laravel\\Sail\\Console\\InstallCommand->replaceEnvVariables(Array)
+#4 /Users/nikolay/shami/metalworking/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Laravel\\Sail\\Console\\InstallCommand->handle()
+#5 /Users/nikolay/shami/metalworking/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate\\Container\\BoundMethod::{closure:Illuminate\\Container\\BoundMethod::call():35}()
+#6 /Users/nikolay/shami/metalworking/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(96): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#7 /Users/nikolay/shami/metalworking/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#8 /Users/nikolay/shami/metalworking/vendor/laravel/framework/src/Illuminate/Container/Container.php(836): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#9 /Users/nikolay/shami/metalworking/vendor/laravel/framework/src/Illuminate/Console/Command.php(211): Illuminate\\Container\\Container->call(Array)
+#10 /Users/nikolay/shami/metalworking/vendor/symfony/console/Command/Command.php(318): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#11 /Users/nikolay/shami/metalworking/vendor/laravel/framework/src/Illuminate/Console/Command.php(180): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#12 /Users/nikolay/shami/metalworking/vendor/symfony/console/Application.php(1073): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#13 /Users/nikolay/shami/metalworking/vendor/symfony/console/Application.php(356): Symfony\\Component\\Console\\Application->doRunCommand(Object(Laravel\\Sail\\Console\\InstallCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 /Users/nikolay/shami/metalworking/vendor/symfony/console/Application.php(195): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 /Users/nikolay/shami/metalworking/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 /Users/nikolay/shami/metalworking/artisan(14): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 {main}
+"} 

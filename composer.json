@@ -1,0 +1,8 @@
+{
+    "require-dev": {
+        "laravel/sail": "^1.48"
+    },
+    "require": {
+        "laravel/framework": "^12.39"
+    }
+}
