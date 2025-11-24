@@ -47,11 +47,21 @@ docker exec -it metalworking-app php artisan key:generate
 ## Стъпка 3: Стартирай Docker контейнерите
 
 ```bash
-# Build и стартиране
-docker-compose -f docker-compose.prod.yml up -d --build
+# Проверка на Docker версията
+docker compose version  # Нова версия (препоръчително)
+# или
+docker-compose --version  # Стара версия
+
+# Build и стартиране (опитай първо новата версия)
+docker compose -f docker-compose.prod.yml up -d --build
+
+# Ако не работи, опитай старата версия:
+# docker-compose -f docker-compose.prod.yml up -d --build
 
 # Проверка на статуса
-docker-compose -f docker-compose.prod.yml ps
+docker compose -f docker-compose.prod.yml ps
+# или
+# docker-compose -f docker-compose.prod.yml ps
 ```
 
 ## Стъпка 4: Изпълни миграции и настройки
