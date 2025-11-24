@@ -10,6 +10,8 @@ RUN apk add --no-cache \
     unzip \
     oniguruma-dev \
     mysql-client \
+    nodejs \
+    npm \
     nginx
 
 # Install PHP extensions
