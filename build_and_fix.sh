@@ -63,3 +63,5 @@ echo "   1. Изчисти кеша на браузъра (Ctrl+Shift+R)"
 echo "   2. Провери в Network tab дали CSS файлът се зарежда"
 echo "   3. Провери дали файлът има правилен Content-Type: text/css"
 
+
+

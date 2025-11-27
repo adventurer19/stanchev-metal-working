@@ -62,3 +62,5 @@ docker exec -it metalworking-nginx cat /etc/nginx/conf.d/default.conf
 docker exec -it metalworking-nginx nginx -t
 ```
 
+
+

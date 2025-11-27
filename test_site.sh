@@ -22,3 +22,5 @@ docker exec -it metalworking-app grep APP_KEY /var/www/html/.env | head -1
 echo ""
 echo "✅ Проверка завършена!"
 
+
+

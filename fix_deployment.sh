@@ -55,3 +55,5 @@ echo ""
 echo "✅ Готово! Проверка на логовете:"
 docker compose -f docker-compose.prod.yml logs --tail=20
 
+
+

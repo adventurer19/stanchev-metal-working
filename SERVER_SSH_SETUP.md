@@ -77,3 +77,5 @@ git clone https://YOUR_TOKEN@github.com/adventurer19/stanchev-metal-working.git 
 
 Използвай **Решение 1** ако вече имаш SSH ключ, или **Решение 4** (HTTPS с token) за най-бързо решение.
 
+
+

@@ -67,3 +67,5 @@ EOF
 echo "✅ .env файлът е актуализиран!"
 echo "⚠️  Не забравяй да генерираш APP_KEY с: docker exec -it metalworking-app php artisan key:generate"
 
+
+

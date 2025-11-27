@@ -144,3 +144,5 @@ docker exec -it metalworking-app php artisan view:cache
 - Можеш да използваш съществуващия Redis контейнер (`maire-redis`)
 - За production, препоръчително е да използваш SSL/HTTPS
 
+
+

@@ -48,3 +48,5 @@ chown -R www-data:www-data storage bootstrap/cache
 
 echo "✅ Deployment completed!"
 
+
+
