@@ -30,7 +30,17 @@ Route::get('/about', function () {
         
         foreach ($dirs as $dir) {
             $productName = basename($dir);
-            $images = glob($dir . '/*.{jpg,jpeg,png,heic,JPG,JPEG,PNG,HEIC}', GLOB_BRACE);
+            // GLOB_BRACE is not available in PHP 8.0+, so we use multiple glob patterns
+            $images = array_merge(
+                glob($dir . '/*.jpg'),
+                glob($dir . '/*.jpeg'),
+                glob($dir . '/*.png'),
+                glob($dir . '/*.heic'),
+                glob($dir . '/*.JPG'),
+                glob($dir . '/*.JPEG'),
+                glob($dir . '/*.PNG'),
+                glob($dir . '/*.HEIC')
+            );
             
             if (!empty($images)) {
                 // Get first image as thumbnail
