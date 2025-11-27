@@ -19,14 +19,43 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-// About page
+// About page (combines About and Portfolio)
 Route::get('/about', function () {
-    return view('about');
+    // Get products from image-products directory
+    $productsDir = public_path('image-products');
+    $products = [];
+    
+    if (is_dir($productsDir)) {
+        $dirs = array_filter(glob($productsDir . '/*'), 'is_dir');
+        
+        foreach ($dirs as $dir) {
+            $productName = basename($dir);
+            $images = glob($dir . '/*.{jpg,jpeg,png,heic,JPG,JPEG,PNG,HEIC}', GLOB_BRACE);
+            
+            if (!empty($images)) {
+                // Get first image as thumbnail
+                $thumbnail = str_replace(public_path(), '', $images[0]);
+                $thumbnail = ltrim($thumbnail, '/');
+                
+                $products[] = [
+                    'slug' => $productName,
+                    'name' => ucfirst(str_replace('-', ' ', $productName)),
+                    'thumbnail' => $thumbnail,
+                    'imageCount' => count($images),
+                    'images' => array_map(function($img) {
+                        return ltrim(str_replace(public_path(), '', $img), '/');
+                    }, $images)
+                ];
+            }
+        }
+    }
+    
+    return view('portfolio', ['products' => $products]);
 })->name('about');
 
-// Portfolio page
+// Redirect /portfolio to /about for backwards compatibility
 Route::get('/portfolio', function () {
-    return view('portfolio');
+    return redirect()->route('about');
 })->name('portfolio');
 
 // Why Us page
