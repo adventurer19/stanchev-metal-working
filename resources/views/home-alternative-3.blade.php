@@ -42,7 +42,7 @@
         
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in" style="animation-delay: 0.3s">
-            <a href="{{ route('portfolio') }}" class="btn-primary text-lg px-10 py-4 min-w-[200px]">
+            <a href="{{ route('about') }}" class="btn-primary text-lg px-10 py-4 min-w-[200px]">
                 {{ __('Виж проектите') }}
             </a>
             <a href="{{ route('contact') }}" class="btn-secondary text-lg px-10 py-4 min-w-[200px]">
@@ -57,4 +57,5 @@
         </svg>
     </div>
 </section>
+
 

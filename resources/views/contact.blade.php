@@ -70,7 +70,7 @@
                         <textarea id="message" name="message" rows="5" required 
                                   class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300 resize-none">{{ old('message') }}</textarea>
                     </div>
-                    <button type="submit" class="w-full btn-primary">
+                    <button type="submit" class="w-full btn-primary" disabled>
                         {{ __('Изпрати съобщение') }}
                     </button>
                 </form>
@@ -88,7 +88,7 @@
                             </div>
                             <div>
                                 <p class="text-slate-300 font-semibold mb-1">{{ __('Адрес') }}</p>
-                                <p class="text-slate-400">Столетов 162</p>
+                                <p class="text-slate-400">{{ __('Болтата, бул. „Столетов" 162') }}</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-4">
@@ -99,7 +99,7 @@
                             </div>
                             <div>
                                 <p class="text-slate-300 font-semibold mb-1">{{ __('Телефон') }}</p>
-                                <a href="tel:+359899125775" class="text-accent-400 hover:text-accent-300 transition-colors duration-300">+359 899 125 775</a>
+                                <a href="tel:+35977855070" class="text-accent-400 hover:text-accent-300 transition-colors duration-300">+359 77855070</a>
                             </div>
                         </div>
                         <div class="flex items-start space-x-4">
@@ -124,7 +124,7 @@
                         </p>
                         <p class="flex justify-between">
                             <span>{{ __('Събота') }}</span>
-                            <span>{{ __('По уговорка') }}</span>
+                            <span>{{ __('Почивен ден') }}</span>
                         </p>
                         <p class="flex justify-between">
                             <span>{{ __('Неделя') }}</span>
@@ -140,12 +140,12 @@
             <div class="card p-0 overflow-hidden">
                 <div class="p-6 border-b border-slate-800">
                     <h3 class="text-2xl font-bold text-white mb-2">{{ __('Нашето местоположение') }}</h3>
-                    <p class="text-slate-400">{{ __('Столетов 162, Габрово') }}</p>
+                    <p class="text-slate-400">{{ __('Болтата, бул. „Столетов" 162, Габрово') }}</p>
                 </div>
                 <div class="relative w-full h-96 rounded-b-sm overflow-hidden bg-slate-800 group">
                     <!-- Google Maps iframe -->
                     <iframe 
-                        src="https://www.google.com/maps?q=Столетов+162,+Габрово,+България&output=embed&hl={{ app()->getLocale() === 'bg' ? 'bg' : 'en' }}&zoom=15"
+                        src="https://www.google.com/maps?q=Болтата,+бул.+Столетов+162,+Габрово,+България&output=embed&hl={{ app()->getLocale() === 'bg' ? 'bg' : 'en' }}&zoom=15"
                         width="100%" 
                         height="100%" 
                         style="border:0; filter: grayscale(30%) brightness(0.8) contrast(1.2);" 
@@ -157,7 +157,7 @@
                     <div class="absolute inset-0 pointer-events-none border border-slate-800/50 rounded-b-sm"></div>
                     <!-- Hover overlay with link -->
                     <div class="absolute inset-0 flex items-center justify-center bg-slate-900/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-sm">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Столетов+162,+Габрово,+България" 
+                        <a href="https://www.google.com/maps/search/?api=1&query=Болтата,+бул.+Столетов+162,+Габрово,+България" 
                            target="_blank" 
                            rel="noopener noreferrer"
                            class="btn-primary">

@@ -18,7 +18,7 @@
         <div class="max-w-5xl mx-auto">
             <!-- Top Badge -->
             <div class="flex justify-center mb-8 animate-fade-in">
-                <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-900/60 backdrop-blur-xl border border-accent-500/30 rounded-full">
+                <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-900/60 backdrop-blur-xl border border-accent-500/30 rounded-sm">
                     <div class="w-1.5 h-1.5 bg-accent-500 rounded-full"></div>
                     <span class="text-xs font-bold text-accent-400 uppercase tracking-widest">{{ __('От 2015 година') }}</span>
                 </div>
@@ -53,7 +53,7 @@
             
             <!-- CTA Buttons -->
             <div class="pl-8 md:pl-16 flex flex-col sm:flex-row gap-4 animate-fade-in" style="animation-delay: 0.3s">
-                <a href="{{ route('portfolio') }}" class="btn-primary">
+                <a href="{{ route('about') }}" class="btn-primary">
                     {{ __('Виж проектите') }}
                 </a>
                 <a href="{{ route('contact') }}" class="btn-secondary">
@@ -69,4 +69,5 @@
         </svg>
     </div>
 </section>
+
 

@@ -17,26 +17,26 @@
     <!-- Navigation -->
     <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 glass border-b border-slate-800/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-24 md:h-28">
                 <div class="flex-shrink-0">
-                    <a href="{{ route('home') }}" class="text-2xl font-bold text-white hover:text-accent-400 transition-colors duration-300">
-                        <span class="text-gradient">СТАНЧЕВ И СИН</span>
+                    <a href="{{ route('home') }}" class="flex flex-col leading-tight hover:opacity-90 transition-opacity duration-300">
+                        <span class="text-2xl md:text-3xl lg:text-4xl font-bold text-gradient">Станчев и Син</span>
+                        <span class="text-sm md:text-base lg:text-lg font-medium text-slate-400">2025 ЕООД</span>
                     </a>
                 </div>
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="{{ route('home') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('home') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-sm transition-all duration-300">{{ __('Начало') }}</a>
-                    <a href="{{ route('about') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('about') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-sm transition-all duration-300">{{ __('За нас') }}</a>
-                    <a href="{{ route('portfolio') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('portfolio') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-sm transition-all duration-300">{{ __('Портфолио') }}</a>
-                    <a href="{{ route('why-us') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('why-us') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-sm transition-all duration-300">{{ __('Защо ние') }}</a>
-                    <a href="{{ route('contact') }}" class="px-4 py-2 text-sm font-medium {{ request()->routeIs('contact') ? 'text-accent-400 bg-slate-800/50' : 'text-slate-300 hover:text-white hover:bg-slate-800/50' }} rounded-sm transition-all duration-300">{{ __('Контакти') }}</a>
+                <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'nav-link-active' : '' }}">{{ __('Начало') }}</a>
+                    <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') || request()->routeIs('portfolio') ? 'nav-link-active' : '' }}">{{ __('За нас') }}</a>
+                    <a href="{{ route('why-us') }}" class="nav-link {{ request()->routeIs('why-us') ? 'nav-link-active' : '' }}">{{ __('Защо ние') }}</a>
+                    <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'nav-link-active' : '' }}">{{ __('Контакти') }}</a>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-1 bg-slate-900/50 rounded-sm p-1 border border-slate-800">
-                        <a href="{{ route('locale', 'bg') }}" class="px-3 py-1.5 text-xs font-medium rounded-sm transition-all duration-300 {{ app()->getLocale() === 'bg' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">БГ</a>
-                        <a href="{{ route('locale', 'en') }}" class="px-3 py-1.5 text-xs font-medium rounded-sm transition-all duration-300 {{ app()->getLocale() === 'en' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">EN</a>
+                <div class="flex items-center space-x-4 md:space-x-5">
+                    <div class="flex items-center space-x-1.5 bg-slate-900/50 rounded-sm p-1.5 md:p-2 border border-slate-800">
+                        <a href="{{ route('locale', 'bg') }}" class="px-4 py-2 md:px-5 md:py-2.5 text-sm md:text-base font-semibold rounded-sm transition-all duration-300 {{ app()->getLocale() === 'bg' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">БГ</a>
+                        <a href="{{ route('locale', 'en') }}" class="px-4 py-2 md:px-5 md:py-2.5 text-sm md:text-base font-semibold rounded-sm transition-all duration-300 {{ app()->getLocale() === 'en' ? 'bg-accent-500 text-white shadow-lg shadow-accent-500/30' : 'text-slate-400 hover:text-slate-200' }}">EN</a>
                     </div>
-                    <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button id="mobile-menu-btn" class="md:hidden p-2.5 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
@@ -62,7 +62,6 @@
             <div class="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
                 <a href="{{ route('home') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Начало') }}</a>
                 <a href="{{ route('about') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('За нас') }}</a>
-                <a href="{{ route('portfolio') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Портфолио') }}</a>
                 <a href="{{ route('why-us') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Защо ние') }}</a>
                 <a href="{{ route('contact') }}" class="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-sm transition-all duration-300">{{ __('Контакти') }}</a>
             </div>
@@ -70,7 +69,7 @@
     </div>
 
     <!-- Main Content -->
-    <main class="pt-20">
+    <main class="pt-24 md:pt-28">
         @yield('content')
     </main>
 
@@ -118,15 +117,15 @@
                     <ul class="space-y-2">
                         <li><a href="{{ route('home') }}" class="text-slate-400 hover:text-accent-400 transition-colors text-sm">{{ __('Начало') }}</a></li>
                         <li><a href="{{ route('about') }}" class="text-slate-400 hover:text-accent-400 transition-colors text-sm">{{ __('За нас') }}</a></li>
-                        <li><a href="{{ route('portfolio') }}" class="text-slate-400 hover:text-accent-400 transition-colors text-sm">{{ __('Портфолио') }}</a></li>
+                        <li><a href="{{ route('about') }}" class="text-slate-400 hover:text-accent-400 transition-colors text-sm">{{ __('За нас') }}</a></li>
                         <li><a href="{{ route('why-us') }}" class="text-slate-400 hover:text-accent-400 transition-colors text-sm">{{ __('Защо ние') }}</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">{{ __('Контакти') }}</h4>
                     <ul class="space-y-2 text-slate-400 text-sm">
-                        <li>Столетов 162</li>
-                        <li><a href="tel:+359899125775" class="hover:text-accent-400 transition-colors">+359 899 125 775</a></li>
+                        <li>{{ __('Болтата, бул. „Столетов" 162') }}</li>
+                        <li><a href="tel:+35977855070" class="hover:text-accent-400 transition-colors">+359 77855070</a></li>
                         <li><a href="mailto:stanchev_sin2025@abv.bg" class="hover:text-accent-400 transition-colors">stanchev_sin2025@abv.bg</a></li>
                     </ul>
                 </div>
@@ -228,6 +227,42 @@
             lastScroll = currentScroll;
         });
 
+        // Handle anchor links with smooth scroll
+        window.addEventListener('load', function() {
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                const element = document.getElementById(hash);
+                if (element) {
+                    setTimeout(() => {
+                        const offsetTop = element.offsetTop - 80; // Account for fixed navbar
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+            }
+        });
+
+        // Handle anchor links on same page
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.length > 1) {
+                    const targetId = href.substring(1);
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        const offsetTop = target.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
         // Intersection Observer for fade-in animations
         const observerOptions = {
             threshold: 0.1,
@@ -243,8 +278,28 @@
             });
         }, observerOptions);
 
+        // Observer for stat cards with staggered animation
+        const statObserverOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const statObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, statObserverOptions);
+
         document.querySelectorAll('.card, section > div').forEach(el => {
             observer.observe(el);
+        });
+
+        // Observe stat cards
+        document.querySelectorAll('.stat-card').forEach((el, index) => {
+            statObserver.observe(el);
         });
 
         // Cookie Consent

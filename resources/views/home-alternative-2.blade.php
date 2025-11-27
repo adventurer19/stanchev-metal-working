@@ -17,7 +17,7 @@
     
     <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         <!-- Badge -->
-        <div class="inline-flex items-center gap-2 mb-8 px-6 py-3 bg-slate-900/60 backdrop-blur-xl border border-accent-500/40 rounded-full shadow-2xl shadow-accent-500/20 animate-slide-down">
+        <div class="inline-flex items-center gap-2 mb-8 px-6 py-3 bg-slate-900/60 backdrop-blur-xl border border-accent-500/40 rounded-sm shadow-2xl shadow-accent-500/20 animate-slide-down">
             <svg class="w-5 h-5 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
@@ -34,7 +34,7 @@
         
         <!-- Description in Card Style -->
         <div class="max-w-4xl mx-auto mb-12 animate-fade-in" style="animation-delay: 0.1s">
-            <div class="glass rounded-lg p-8 border border-slate-800/50 shadow-xl">
+            <div class="glass rounded-sm p-8 border border-slate-800/50 shadow-xl">
                 <p class="text-xl md:text-2xl text-slate-200 leading-relaxed mb-4">
                     {{ __('Индустриални решения с внимание към всеки детайл.') }}
                 </p>
@@ -46,7 +46,7 @@
         
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in" style="animation-delay: 0.2s">
-            <a href="{{ route('portfolio') }}" class="btn-primary text-lg px-8 py-4">
+            <a href="{{ route('about') }}" class="btn-primary text-lg px-8 py-4">
                 {{ __('Виж проектите') }}
             </a>
             <a href="{{ route('contact') }}" class="btn-secondary text-lg px-8 py-4">
@@ -61,4 +61,5 @@
         </svg>
     </div>
 </section>
+
 

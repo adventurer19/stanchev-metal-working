@@ -5,14 +5,17 @@
 @section('content')
 <!-- Hero Section -->
 <section class="relative py-32 bg-slate-950 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950"></div>
+        <img src="{{ asset('metalworking-images/why-us.png') }}" alt="{{ __('Защо да изберете нас?') }}" class="w-full h-full object-cover opacity-20">
+    </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-16">
             <h1 class="section-title">
                 {{ __('Защо да изберете нас?') }}
             </h1>
             <p class="section-subtitle">
-                {{ __('Разбираме, че успехът на вашия бизнес зависи от качеството и надеждността на вашите партньори.') }}
+                {{ __('Разбираме, че успехът на вашия бизнес зависи от качеството и надеждността на вашите партньори. Затова предлагаме решения, които не просто отговарят на стандартите, а ги надхвърлят.') }}
             </p>
         </div>
     </div>
@@ -31,7 +34,7 @@
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-4">{{ __('Прецизност') }}</h3>
                 <p class="text-slate-400 leading-relaxed">
-                    {{ __('Всяка детайл е изработен с внимание към перфектността и качеството.') }}
+                    {{ __('Всеки детайл е изработен с внимание към перфектността и качеството.') }}
                 </p>
             </div>
             <div class="card card-hover text-center">
@@ -111,7 +114,31 @@
                         </svg>
                         {{ __('Гъвкави срокове') }}
                     </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-accent-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        {{ __('Изработване на чертежи') }}
+                    </li>
                 </ul>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="mt-20 text-center">
+            <div class="max-w-2xl mx-auto">
+                <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    {{ __('Готови ли сте да работим заедно?') }}
+                </h3>
+                <p class="text-lg md:text-xl text-slate-300 mb-8 leading-relaxed">
+                    {{ __('Свържете се с нас днес и открийте как можем да помогнем на вашия бизнес да постигне нови висоти.') }}
+                </p>
+                <a href="{{ route('contact') }}" class="btn-primary inline-flex items-center gap-3 group">
+                    <span>{{ __('Свържете се с нас') }}</span>
+                    <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </div>

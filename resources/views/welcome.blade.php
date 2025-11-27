@@ -60,7 +60,7 @@
                 $heroImage = $heroImages[array_rand($heroImages)];
             @endphp
             <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950"></div>
-            <img src="{{ asset('images/' . $heroImage) }}" alt="Metalworking" class="w-full h-full object-cover opacity-20">
+            <img src="{{ asset('images/' . $heroImage) }}" alt="{{ __('Металообработка') }}" class="w-full h-full object-cover opacity-20">
             <div class="absolute inset-0 bg-gradient-radial"></div>
         </div>
         <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto animate-fade-in">
@@ -114,7 +114,7 @@
                             <div>
                                 <h3 class="text-xl font-bold text-white mb-2">{{ __('Прецизност и качество') }}</h3>
                                 <p class="text-slate-400 leading-relaxed">
-                                    {{ __('Всяка детайл е изработен с внимание към перфектността. Използваме модерни технологии и строг контрол на качеството.') }}
+                                    {{ __('Всеки детайл е изработен с внимание към перфектността. Използваме модерни технологии и строг контрол на качеството.') }}
                                 </p>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                     @foreach($craftImages as $index => $img)
                         <div class="{{ $index === 0 ? 'col-span-2' : '' }} group relative overflow-hidden rounded-sm border border-slate-800/50 hover:border-accent-500/50 transition-all duration-500">
                             <div class="aspect-square overflow-hidden">
-                                <img src="{{ asset('images/' . $img) }}" alt="Craft {{ $index + 1 }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                <img src="{{ asset('images/' . $img) }}" alt="{{ __('Майсторство') }} {{ $index + 1 }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                             </div>
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         </div>
@@ -215,7 +215,7 @@
                 @foreach($portfolioImages as $index => $img)
                     <div class="group relative overflow-hidden rounded-sm border border-slate-800/50 bg-slate-900/50 cursor-pointer transform transition-all duration-500 hover:scale-[1.02] hover:border-accent-500/50 hover:shadow-2xl hover:shadow-accent-500/20">
                         <div class="aspect-square overflow-hidden">
-                            <img src="{{ asset('images/' . $img) }}" alt="Project {{ $index + 1 }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <img src="{{ asset('images/' . $img) }}" alt="{{ __('Проект') }} {{ $index + 1 }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                             <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
@@ -250,7 +250,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">{{ __('Прецизност') }}</h3>
                     <p class="text-slate-400 leading-relaxed">
-                        {{ __('Всяка детайл е изработен с внимание към перфектността и качеството.') }}
+                        {{ __('Всеки детайл е изработен с внимание към перфектността и качеството.') }}
                     </p>
                 </div>
                 <div class="card card-hover text-center">
@@ -334,7 +334,7 @@
                                 </div>
                                 <div>
                                     <p class="text-slate-300 font-semibold mb-1">{{ __('Адрес') }}</p>
-                                    <p class="text-slate-400">гр. Габрово, бул. ХЕМУС, 23, ет. 7</p>
+                                    <p class="text-slate-400">{{ __('гр. Габрово, бул. ХЕМУС, 23, ет. 7') }}</p>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-4">

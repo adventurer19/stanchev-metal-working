@@ -41,7 +41,7 @@
                 </div>
                 
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="{{ route('portfolio') }}" class="btn-primary">
+                    <a href="{{ route('about') }}" class="btn-primary">
                         {{ __('Виж проектите') }}
                     </a>
                     <a href="{{ route('contact') }}" class="btn-secondary">
@@ -78,4 +78,5 @@
         </svg>
     </div>
 </section>
+
 
