@@ -4,14 +4,14 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative py-32 bg-slate-950 overflow-hidden">
+<section class="relative py-16 sm:py-24 md:py-32 bg-slate-950 overflow-hidden">
     <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950"></div>
         <img src="{{ asset('metalworking-images/contact-us-img.jpg') }}" alt="{{ __('Контакти') }}" class="w-full h-full object-cover opacity-20">
         <div class="absolute inset-0 bg-gradient-radial"></div>
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center mb-16">
+        <div class="text-center mb-12 sm:mb-16">
             <h1 class="section-title">
                 {{ __('Свържете се с нас') }}
             </h1>
@@ -23,12 +23,12 @@
 </section>
 
 <!-- Contact Section -->
-<section class="py-32 bg-slate-900 relative overflow-hidden">
+<section class="py-16 sm:py-24 md:py-32 bg-slate-900 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid lg:grid-cols-2 gap-12">
+        <div class="grid lg:grid-cols-2 gap-8 sm:gap-12">
             <div class="card">
-                <h2 class="text-3xl font-bold text-white mb-8">{{ __('Изпратете ни съобщение') }}</h2>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">{{ __('Изпратете ни съобщение') }}</h2>
                 @if(session('success'))
                     <div class="mb-6 p-4 bg-accent-500/20 border border-accent-500/50 rounded-sm text-accent-400">
                         {{ session('success') }}
@@ -75,49 +75,49 @@
                     </button>
                 </form>
             </div>
-            <div class="space-y-8">
+            <div class="space-y-6 sm:space-y-8">
                 <div class="card">
-                    <h3 class="text-2xl font-bold text-white mb-8">{{ __('Контактна информация') }}</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-14 h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
-                                <svg class="w-7 h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8">{{ __('Контактна информация') }}</h3>
+                    <div class="space-y-4 sm:space-y-6">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 sm:w-7 sm:h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-slate-300 font-semibold mb-1">{{ __('Адрес') }}</p>
-                                <p class="text-slate-400">{{ __('Болтата, бул. „Столетов" 162') }}</p>
+                                <p class="text-sm sm:text-base text-slate-300 font-semibold mb-1">{{ __('Адрес') }}</p>
+                                <p class="text-sm sm:text-base text-slate-400">{{ __('Болтата, бул. „Столетов" 162') }}</p>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="w-14 h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
-                                <svg class="w-7 h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 sm:w-7 sm:h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-slate-300 font-semibold mb-1">{{ __('Телефон') }}</p>
-                                <a href="tel:+35977855070" class="text-accent-400 hover:text-accent-300 transition-colors duration-300">+359 77855070</a>
+                                <p class="text-sm sm:text-base text-slate-300 font-semibold mb-1">{{ __('Телефон') }}</p>
+                                <a href="tel:+35977855070" class="text-sm sm:text-base text-accent-400 hover:text-accent-300 transition-colors duration-300">+359 77855070</a>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="w-14 h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
-                                <svg class="w-7 h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 sm:w-7 sm:h-7 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-slate-300 font-semibold mb-1">{{ __('Имейл') }}</p>
-                                <a href="mailto:stanchev_sin2025@abv.bg" class="text-accent-400 hover:text-accent-300 transition-colors duration-300">stanchev_sin2025@abv.bg</a>
+                                <p class="text-sm sm:text-base text-slate-300 font-semibold mb-1">{{ __('Имейл') }}</p>
+                                <a href="mailto:stanchev_sin2025@abv.bg" class="text-sm sm:text-base text-accent-400 hover:text-accent-300 transition-colors duration-300 break-all">stanchev_sin2025@abv.bg</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <h3 class="text-2xl font-bold text-white mb-4">{{ __('Работно време') }}</h3>
-                    <div class="space-y-2 text-slate-400">
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">{{ __('Работно време') }}</h3>
+                    <div class="space-y-2 sm:space-y-3 text-sm sm:text-base text-slate-400">
                         <p class="flex justify-between">
                             <span>{{ __('Понеделник - Петък') }}</span>
                             <span>08:00 - 17:00</span>

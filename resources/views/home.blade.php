@@ -4,31 +4,31 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+<section class="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950"></div>
         <img src="{{ asset('metalworking-images/metal-working-premium.png') }}" alt="{{ __('Металообработка') }}" class="w-full h-full object-cover opacity-20">
         <div class="absolute inset-0 bg-gradient-radial"></div>
     </div>
-    <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto animate-fade-in">
-        <div class="inline-flex items-center gap-3 mb-6 px-8 py-4 bg-gradient-to-r from-amber-500/25 via-amber-500/20 to-amber-500/25 backdrop-blur-md border-2 border-amber-400/70 rounded-sm shadow-2xl shadow-amber-500/40 ring-2 ring-amber-500/20">
-            <svg class="w-6 h-6 text-amber-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto animate-fade-in py-8 sm:py-12">
+        <div class="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-gradient-to-r from-amber-500/25 via-amber-500/20 to-amber-500/25 backdrop-blur-md border-2 border-amber-400/70 rounded-sm shadow-2xl shadow-amber-500/40 ring-2 ring-amber-500/20">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-amber-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <span class="text-lg md:text-xl font-bold text-amber-100 tracking-wide drop-shadow-lg">{{ __('15+ години опит в индустрията') }}</span>
+            <span class="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-amber-100 tracking-wide drop-shadow-lg">{{ __('15+ години опит в индустрията') }}</span>
         </div>
-        <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 text-white leading-tight">
-            <span class="block mb-2 tracking-tight">{{ __('Металообработка') }}</span>
-            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-accent-400 via-accent-500 to-accent-600 drop-shadow-2xl">{{ __('с премиум качество') }}</span>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-extrabold mb-4 sm:mb-6 text-white leading-tight px-2">
+            <span class="block mb-1 sm:mb-2 tracking-tight">{{ __('Металообработка') }}</span>
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-accent-400 via-accent-500 to-accent-600 drop-shadow-2xl text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl">{{ __('с премиум качество') }}</span>
         </h1>
-        <div class="mb-12 max-w-4xl mx-auto space-y-4">
-            <p class="text-xl md:text-2xl text-slate-200 leading-relaxed font-medium">
+        <div class="mb-8 sm:mb-10 md:mb-12 max-w-4xl mx-auto space-y-3 sm:space-y-4 px-2">
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-200 leading-relaxed font-medium">
                 {{ __('Специализирани сме в производството на прецизни метални детайли и компоненти за различни индустрии.') }}
             </p>
-            <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+            <p class="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 leading-relaxed">
                 {{ __('Използваме модерно оборудване и дългогодишен опит, за да създадем решения, които отговарят на най-строгите изисквания за качество и прецизност.') }}
             </p>
-            <p class="text-lg md:text-xl text-slate-200 leading-relaxed font-normal tracking-normal">
+            <p class="text-sm sm:text-base md:text-lg lg:text-xl text-slate-200 leading-relaxed font-normal tracking-normal hidden sm:block">
                 {{ __('Работим с клиенти от машиностроенето, автомобилната промишленост, военната индустрия и други, предлагайки персонализирани услуги по лазерно рязане, CNC обработка, стругова обработка и много други.') }}
             </p>
         </div>
@@ -46,18 +46,18 @@
 </section>
 
 <!-- What We Do Section -->
-<section class="py-32 bg-slate-950 relative overflow-hidden">
+<section class="py-16 sm:py-24 md:py-32 bg-slate-950 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center mb-20">
-            <h2 class="section-title">
+        <div class="text-center mb-12 sm:mb-16 md:mb-20">
+            <h2 class="section-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                 {{ __('Какво правим') }}
             </h2>
-            <p class="section-subtitle">
+            <p class="section-subtitle text-base sm:text-lg md:text-xl mt-4 px-4">
                 {{ __('Предлагаме широк спектър от металообработващи услуги с високо качество и прецизност') }}
             </p>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <div class="card card-hover group relative overflow-hidden">
                 <div class="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity">
                     <img src="{{ asset('metalworking-images/photo-1676646693434-8ee684e8ba49.avif') }}" alt="{{ __('CNC обработка') }}" class="w-full h-full object-cover">
@@ -135,19 +135,19 @@
 </section>
 
 <!-- Call to Action Section -->
-<section class="py-32 bg-slate-900 relative overflow-hidden">
+<section class="py-16 sm:py-24 md:py-32 bg-slate-900 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.08),transparent_70%)]"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <!-- Left Content -->
-            <div class="space-y-8">
+            <div class="space-y-6 sm:space-y-8">
                 <div>
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                         {{ __('Започнете вашия проект с нас!') }}
                     </h2>
-                    <div class="space-y-6">
-                        <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+                    <div class="space-y-4 sm:space-y-6">
+                        <p class="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed">
                             {{ __('Готови сте да направите следващата стъпка? Нашият екип е тук, за да отговори на вашите нужди и да ви предложи иновативни решения.') }}
                         </p>
                     </div>
@@ -181,7 +181,7 @@
 </section>
 
 <!-- Our Mission Section -->
-<section class="py-32 bg-slate-950 relative overflow-hidden">
+<section class="py-16 sm:py-24 md:py-32 bg-slate-950 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.08),transparent_70%)]"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -200,21 +200,21 @@
             </div>
             
             <!-- Right Content -->
-            <div class="space-y-8">
+            <div class="space-y-6 sm:space-y-8">
                 <div>
                     <!-- Badge -->
-                    <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-accent-500/10 backdrop-blur-sm border border-accent-500/30 rounded-sm">
-                        <svg class="w-5 h-5 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="inline-flex items-center gap-2 mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-accent-500/10 backdrop-blur-sm border border-accent-500/30 rounded-sm">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                         </svg>
-                        <span class="text-sm font-semibold text-accent-300 tracking-wide">{{ __('Нашата мисия') }}</span>
+                        <span class="text-xs sm:text-sm font-semibold text-accent-300 tracking-wide">{{ __('Нашата мисия') }}</span>
                     </div>
                     
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                         {{ __('Мисия и цели') }}
                     </h2>
-                    <div class="space-y-6">
-                        <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+                    <div class="space-y-4 sm:space-y-6">
+                        <p class="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed">
                             {{ __('Нашата мисия е да предоставяме висококачествени продукти и услуги, които да подпомагат успеха на нашите клиенти както на национално, така и на международно ниво. Стремим се към постоянни иновации, подобряване на конкурентоспособността и дълготрайни партньорства.') }}
                         </p>
                     </div>
@@ -225,21 +225,21 @@
 </section>
 
 <!-- Partners Section -->
-<section class="partners-section py-32 bg-slate-900 relative overflow-hidden">
+<section class="partners-section py-16 sm:py-24 md:py-32 bg-slate-900 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.08),transparent_70%)]"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center mb-20">
-            <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-accent-500/10 backdrop-blur-sm border border-accent-500/30 rounded-sm">
-                <svg class="w-5 h-5 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="text-center mb-12 sm:mb-16 md:mb-20">
+            <div class="inline-flex items-center gap-2 mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 bg-accent-500/10 backdrop-blur-sm border border-accent-500/30 rounded-sm">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
-                <span class="text-sm font-semibold text-accent-300 tracking-wide">{{ __('Доверени клиенти') }}</span>
+                <span class="text-xs sm:text-sm font-semibold text-accent-300 tracking-wide">{{ __('Доверени клиенти') }}</span>
             </div>
-            <h2 class="section-title">
+            <h2 class="section-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                 {{ __('Доверени клиенти') }}
             </h2>
-            <p class="section-subtitle">
+            <p class="section-subtitle text-base sm:text-lg md:text-xl mt-4 px-4">
                 {{ __('Доверени партньори в различни индустрии') }}
             </p>
         </div>
@@ -269,7 +269,7 @@
                 ];
             @endphp
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
                 @foreach($partners as $index => $partner)
                     <div class="partner-card-static group">
                         <div class="partner-card-inner-static relative overflow-hidden h-full">

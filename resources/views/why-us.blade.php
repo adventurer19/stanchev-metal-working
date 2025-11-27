@@ -4,13 +4,13 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative py-32 bg-slate-950 overflow-hidden">
+<section class="relative py-16 sm:py-24 md:py-32 bg-slate-950 overflow-hidden">
     <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950"></div>
         <img src="{{ asset('metalworking-images/why-us.png') }}" alt="{{ __('Защо да изберете нас?') }}" class="w-full h-full object-cover opacity-20">
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center mb-16">
+        <div class="text-center mb-12 sm:mb-16">
             <h1 class="section-title">
                 {{ __('Защо да изберете нас?') }}
             </h1>
@@ -22,18 +22,18 @@
 </section>
 
 <!-- Why Choose Us Section -->
-<section class="py-32 bg-slate-900 relative overflow-hidden">
+<section class="py-16 sm:py-24 md:py-32 bg-slate-900 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <div class="grid md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
             <div class="card card-hover text-center">
                 <div class="w-20 h-20 bg-accent-500/20 rounded-sm flex items-center justify-center mb-6 mx-auto">
                     <svg class="w-10 h-10 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
-                <h3 class="text-2xl font-bold text-white mb-4">{{ __('Прецизност') }}</h3>
-                <p class="text-slate-400 leading-relaxed">
+                <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">{{ __('Прецизност') }}</h3>
+                <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
                     {{ __('Всеки детайл е изработен с внимание към перфектността и качеството.') }}
                 </p>
             </div>
@@ -44,8 +44,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
                 </div>
-                <h3 class="text-2xl font-bold text-white mb-4">{{ __('Модерно оборудване') }}</h3>
-                <p class="text-slate-400 leading-relaxed">
+                <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">{{ __('Модерно оборудване') }}</h3>
+                <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
                     {{ __('Работим с най-модерните технологии и машини за най-добри резултати.') }}
                 </p>
             </div>
@@ -55,8 +55,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
                 </div>
-                <h3 class="text-2xl font-bold text-white mb-4">{{ __('Опитен екип') }}</h3>
-                <p class="text-slate-400 leading-relaxed">
+                <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">{{ __('Опитен екип') }}</h3>
+                <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
                     {{ __('Нашият екип има дългогодишен опит в металообработката.') }}
                 </p>
             </div>

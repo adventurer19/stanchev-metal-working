@@ -4,13 +4,13 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative py-32 bg-slate-950 overflow-hidden">
+<section class="relative py-16 sm:py-24 md:py-32 bg-slate-950 overflow-hidden">
     <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/80 to-slate-950"></div>
         <img src="{{ asset('metalworking-images/photo-1648815546048-6da4f0083a6d.avif') }}" alt="{{ __('Металообработка') }}" class="w-full h-full object-cover opacity-20">
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center mb-16">
+        <div class="text-center mb-12 sm:mb-16">
             <h1 class="section-title">
                 {{ __('Нашето майсторство') }}
             </h1>
@@ -22,20 +22,20 @@
 </section>
 
 <!-- About Section -->
-<section class="py-32 bg-slate-900 relative overflow-hidden">
+<section class="py-16 sm:py-24 md:py-32 bg-slate-900 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <!-- Left: Text Content -->
-            <div class="space-y-6">
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            <div class="space-y-4 sm:space-y-6">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
                     {{ __('Прецизна металообработка и висококачествено производство') }}
                 </h2>
-                <div class="space-y-4">
-                    <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+                <div class="space-y-3 sm:space-y-4">
+                    <p class="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed">
                         {{ __('Като семеен бизнес с дългогодишна традиция, ние се специализираме в изработката на метални компоненти и детайли, създадени по най-високи стандарти за качество, точност и надеждност. Нашият опит, ни позволява да изпълняваме дори най-строгите технически изисквания и спецификации в индустрията.') }}
                     </p>
-                    <p class="text-lg md:text-xl text-slate-300 leading-relaxed">
+                    <p class="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed">
                         {{ __('Нашата цел е да изграждаме дългосрочни партньорства, като предлагаме решения, които подпомагат развитието на бизнеса на нашите клиенти и отговарят изцяло на техните индивидуални нужди') }}
                     </p>
                 </div>
@@ -54,10 +54,10 @@
 </section>
 
 <!-- Features Section -->
-<section class="py-32 bg-slate-900 relative overflow-hidden">
+<section class="py-16 sm:py-24 md:py-32 bg-slate-900 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid md:grid-cols-3 gap-6 lg:gap-8 mb-20">
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8 mb-12 sm:mb-16 md:mb-20">
             <div class="card card-hover">
                 <div class="flex items-start space-x-4">
                     <div class="w-12 h-12 bg-accent-500/20 rounded-sm flex items-center justify-center flex-shrink-0">
