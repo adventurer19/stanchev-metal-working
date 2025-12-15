@@ -37,7 +37,7 @@ npm run dev
 ```bash
 ssh maire-atelier
 cd /opt/projects/stanchev-metal-working
-docker-compose -f docker-compose.prod.yml up -d --build
+docker compose -f docker-compose.prod.yml up -d --build
 ```
 
 ## Структура на файловете
