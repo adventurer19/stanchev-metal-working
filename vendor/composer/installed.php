@@ -3,7 +3,7 @@
         'name' => 'metalworking/website',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '82932d599ed3acefebb8f8312f0204dc0c4c4b79',
+        'reference' => 'a2286730f9b28b08f7535424db9f4904bfadd789',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -436,7 +436,7 @@
         'metalworking/website' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '82932d599ed3acefebb8f8312f0204dc0c4c4b79',
+            'reference' => 'a2286730f9b28b08f7535424db9f4904bfadd789',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -604,8 +604,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(
