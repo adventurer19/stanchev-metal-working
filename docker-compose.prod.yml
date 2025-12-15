@@ -1,9 +1,8 @@
 services:
-  app:
+  stanchev-app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: stanchev-metalworking-app
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
@@ -12,11 +11,12 @@ services:
     networks:
       - nginx-network
     depends_on:
-      - mysql
-      -
-  mysql:
+      - stanchev-db
+    expose:
+      - "9000"
+
+  stanchev-db:
     image: mysql:8.0
-    container_name: stanchev-metalworking-mysql
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_DATABASE:-metalworking}
@@ -27,13 +27,6 @@ services:
       - stanchev-metalworking-mysql-data:/var/lib/mysql
     networks:
       - nginx-network
-    ports:
-      - "3308:3306"
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
 networks:
   nginx-network:
@@ -42,4 +35,3 @@ networks:
 volumes:
   stanchev-metalworking-mysql-data:
     driver: local
-
