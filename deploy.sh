@@ -21,9 +21,10 @@ docker compose -f docker-compose.prod.yml down || true
 echo -e "${YELLOW}📥 Pulling latest changes from git...${NC}"
 git pull origin main
 
-# Step 3: Clean up old dependencies
+# Step 3: Clean up old dependencies (with sudo for docker-created files)
 echo -e "${YELLOW}🧹 Cleaning up old dependencies...${NC}"
-rm -rf vendor node_modules bootstrap/cache/*.php
+sudo rm -rf vendor node_modules
+sudo rm -f bootstrap/cache/packages.php bootstrap/cache/services.php
 
 # Step 4: Install Composer dependencies
 echo -e "${YELLOW}📦 Installing Composer dependencies...${NC}"
