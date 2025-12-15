@@ -6,7 +6,6 @@
         "laravel/framework": "^12.39"
     },
     "require-dev": {
-        "laravel/sail": "^1.48"
     },
     "autoload": {
         "psr-4": {
