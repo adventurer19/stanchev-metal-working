@@ -1,0 +1,26 @@
+# Примерен nginx-prod service блок за maire-atelier/docker-compose.yml
+# Копирай това в твоя docker-compose.yml файл
+
+nginx-prod:
+  image: nginx:1.25-alpine
+  container_name: maire-nginx-prod
+  depends_on:
+    - backend-prod
+    - frontend-prod
+  volumes:
+    - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./docker/nginx/conf.d/app-multi-ssl.conf:/etc/nginx/conf.d/default.conf:ro
+    # Maire-atelier volumes
+    - ./backend/public:/var/www/html/public:ro
+    # Stanchev-metal-working volumes
+    # РАЗКОМЕНТИРАЙ следващия ред когато добавиш stanchev конфигурацията
+    - ../stanchev-metal-working/public:/var/www/stanchev/public:ro
+    # SSL certificates
+    - /etc/letsencrypt:/etc/letsencrypt:ro
+    - /var/www/certbot:/var/www/certbot:ro
+  ports:
+    - "80:80"
+    - "443:443"
+  profiles: [prod-sim]
+  networks: [app]
+

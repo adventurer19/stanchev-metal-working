@@ -1,0 +1,50 @@
+# Production docker-compose - БЕЗ nginx контейнер
+# На сървъра се използва общият nginx контейнер от maire-atelier проекта
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stanchev-metalworking-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - maire-network  # Използва същата мрежа като maire-atelier
+    depends_on:
+      - mysql
+    environment:
+      - PHP_FPM_LISTEN=0.0.0.0:9000
+
+  mysql:
+    image: mysql:8.0
+    container_name: stanchev-metalworking-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-metalworking}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
+      MYSQL_USER: ${DB_USERNAME:-metalworking}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-password}
+    volumes:
+      - stanchev-metalworking-mysql-data:/var/lib/mysql
+    networks:
+      - maire-network
+    ports:
+      - "3308:3306"  # Различен порт от maire проекта
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  maire-network:
+    external: true  # Използва съществуващата мрежа от maire-atelier
+
+volumes:
+  stanchev-metalworking-mysql-data:
+    driver: local
+

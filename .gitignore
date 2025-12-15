@@ -46,6 +46,9 @@ yarn-debug.log*
 
 # Docker
 docker-compose.override.yml
+# Keep production files in git
+!docker-compose.prod.yml
+!docker/nginx/production.conf
 
 # Build files (keep directory structure, ignore contents)
 /public/build/*
