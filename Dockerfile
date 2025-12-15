@@ -21,19 +21,13 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy entrypoint script
-COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
-
 # Copy existing application directory permissions
 RUN chown -R www-data:www-data /var/www/html
 
 # Change current user to www-data
 USER www-data
 
-# Expose port 9000
+# Expose port 9000 and start php-fpm server
 EXPOSE 9000
-
-# Use entrypoint script
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["php-fpm"]
 

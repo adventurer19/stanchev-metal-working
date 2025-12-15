@@ -32,12 +32,12 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 60s
+      start_period: 40s
 
   stanchev-db:
     image: mysql:8.0
-    restart: unless-stopped
     container_name: stanchev-db
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_DATABASE:-metalworking}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
