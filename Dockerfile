@@ -3,8 +3,6 @@ FROM php:8.4-fpm
 # Set working directory
 WORKDIR /var/www/html
 
-# Test auto-rebuild
-
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
