@@ -26,42 +26,34 @@ npm run dev
 
 ## Production Deployment
 
-### 🚀 Бърз Deploy (ежедневни промени)
+### 🚀 Deploy (един команда)
 
 ```bash
-# От твоя локален компютър
+# Локално
 git add .
-git commit -m "Описание на промените"
+git commit -m "Промени"
 git push origin main
 
-# Deploy на сървъра
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && bash quick-deploy.sh"
-```
-
-### 🔧 Пълен Deploy (с нови зависимости)
-
-```bash
+# Deploy
 ssh maire-atelier "cd /opt/projects/stanchev-metal-working && bash deploy.sh"
 ```
 
-### 📚 Пълна документация
+Това е! Скриптът автоматично:
+- Pull-ва кода
+- Поправя permissions
+- Build-ва assets
+- Optimize-ва Laravel
+- Restart-ва app
 
-Виж **[DEPLOYMENT.md](DEPLOYMENT.md)** за:
-- Различни deployment сценарии
-- Troubleshooting
-- Rollback процедури
-- Best practices
+Виж **[DEPLOYMENT.md](DEPLOYMENT.md)** за troubleshooting
 
 ## Структура на файловете
 
-### Docker & Deployment
-- `docker-compose.yml` - за локална разработка (с nginx)
-- `docker-compose.prod.yml` - за production (без nginx)
-- `Dockerfile` - PHP-FPM контейнер конфигурация
-- `deploy.sh` - Пълен deployment скрипт
-- `quick-deploy.sh` - Бърз deployment за ежедневни промени
-- `DEPLOYMENT.md` - Пълна deployment документация
-- `SERVER_SETUP.md` - Първоначална настройка на сървъра
+### Файлове
+- `docker-compose.yml` - локална разработка
+- `docker-compose.prod.yml` - production
+- `deploy.sh` - **ЕДИНСТВЕНИЯТ deployment скрипт**
+- `DEPLOYMENT.md` - troubleshooting
 
 ## Полезни команди
 

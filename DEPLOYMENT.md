@@ -1,253 +1,24 @@
-# Deployment Workflow
+# Deployment
 
-## 🚀 Как да деплойваш промени на production
+## 🚀 Как да деплойваш
 
-### Стандартен workflow (за повечето промени)
-
-#### 1. Локална разработка
 ```bash
-# Стартирай локалния dev environment
-docker-compose up -d
-npm run dev
-
-# Прави промените си
-# Тествай локално на http://localhost:8080
-```
-
-#### 2. Commit и push към GitHub
-```bash
+# 1. Локално - commit промените
 git add .
-git commit -m "Описание на промените"
+git commit -m "Промени"
 git push origin main
-```
 
-#### 3. Deploy на production сървъра
-
-**Опция А: Бърз deploy (само код промени, без нови зависимости)**
-```bash
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  git pull origin main && \
-  docker compose -f docker-compose.prod.yml exec -T stanchev-app npm run build && \
-  docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan config:cache && \
-  docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan route:cache && \
-  docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan view:cache"
-```
-
-**Опция Б: Пълен deploy (с нови зависимости или промени в конфигурация)**
-```bash
+# 2. Deploy
 ssh maire-atelier "cd /opt/projects/stanchev-metal-working && bash deploy.sh"
 ```
 
----
-
-## 📋 Различни сценарии
-
-### Сценарий 1: Промени само в Blade templates или CSS
-```bash
-# На сървъра
-ssh maire-atelier
-cd /opt/projects/stanchev-metal-working
-git pull origin main
-docker compose -f docker-compose.prod.yml exec stanchev-app npm run build
-docker compose -f docker-compose.prod.yml exec stanchev-app php artisan view:cache
-```
-
-### Сценарий 2: Промени в PHP код (Controllers, Models, Routes)
-```bash
-# На сървъра
-ssh maire-atelier
-cd /opt/projects/stanchev-metal-working
-git pull origin main
-docker compose -f docker-compose.prod.yml exec stanchev-app php artisan config:cache
-docker compose -f docker-compose.prod.yml exec stanchev-app php artisan route:cache
-docker compose -f docker-compose.prod.yml exec stanchev-app php artisan view:cache
-```
-
-### Сценарий 3: Нови Composer зависимости
-```bash
-# На сървъра
-ssh maire-atelier
-cd /opt/projects/stanchev-metal-working
-git pull origin main
-docker compose -f docker-compose.prod.yml exec stanchev-app composer install --no-dev --optimize-autoloader
-docker compose -f docker-compose.prod.yml exec stanchev-app php artisan config:cache
-```
-
-### Сценарий 4: Нови NPM зависимости
-```bash
-# На сървъра
-ssh maire-atelier
-cd /opt/projects/stanchev-metal-working
-git pull origin main
-docker compose -f docker-compose.prod.yml exec stanchev-app npm install
-docker compose -f docker-compose.prod.yml exec stanchev-app npm run build
-```
-
-### Сценарий 5: Database migrations
-```bash
-# На сървъра
-ssh maire-atelier
-cd /opt/projects/stanchev-metal-working
-git pull origin main
-docker compose -f docker-compose.prod.yml exec stanchev-app php artisan migrate --force
-```
-
-### Сценарий 6: Промени в .env файл
-```bash
-# На сървъра
-ssh maire-atelier
-cd /opt/projects/stanchev-metal-working
-nano .env  # Редактирай .env файла
-docker compose -f docker-compose.prod.yml exec stanchev-app php artisan config:cache
-docker compose -f docker-compose.prod.yml restart stanchev-app
-```
-
-### Сценарий 7: Промени в Dockerfile или docker-compose.prod.yml
-```bash
-# На сървъра
-ssh maire-atelier
-cd /opt/projects/stanchev-metal-working
-git pull origin main
-docker compose -f docker-compose.prod.yml down
-docker compose -f docker-compose.prod.yml build --no-cache
-docker compose -f docker-compose.prod.yml up -d
-# След това инсталирай зависимости отново (виж deploy.sh)
-```
-
-### Сценарий 8: Промени в nginx конфигурация
-```bash
-# На сървъра
-ssh maire-atelier
-cd /opt/projects/nginx-container
-# Редактирай nginx/conf.d/sites/stanchevisin.com.conf
-docker compose exec nginx nginx -t  # Тествай конфигурацията
-docker compose restart nginx
-```
+**Готово!** Толкова е просто.
 
 ---
 
-## 🔧 Полезни команди
+## 🔥 Ако нещо се обърка
 
-### Проверка на статус
-```bash
-# Статус на контейнерите
-ssh maire-atelier "docker ps | grep stanchev"
-
-# Логове
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  docker compose -f docker-compose.prod.yml logs -f stanchev-app"
-
-# Проверка на nginx логове
-ssh maire-atelier "cd /opt/projects/nginx-container && \
-  docker compose logs -f nginx"
-```
-
-### Debugging
-```bash
-# Влез в контейнера
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  docker compose -f docker-compose.prod.yml exec stanchev-app bash"
-
-# Изчисти кеша
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  docker compose -f docker-compose.prod.yml exec stanchev-app php artisan cache:clear && \
-  docker compose -f docker-compose.prod.yml exec stanchev-app php artisan config:clear && \
-  docker compose -f docker-compose.prod.yml exec stanchev-app php artisan route:clear && \
-  docker compose -f docker-compose.prod.yml exec stanchev-app php artisan view:clear"
-```
-
-### Рестартиране
-```bash
-# Рестартирай само app контейнера
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  docker compose -f docker-compose.prod.yml restart stanchev-app"
-
-# Рестартирай всички контейнери
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  docker compose -f docker-compose.prod.yml restart"
-
-# Рестартирай nginx
-ssh maire-atelier "cd /opt/projects/nginx-container && \
-  docker compose restart nginx"
-```
-
----
-
-## 📝 Препоръчителен workflow (Best Practices)
-
-### За ежедневна разработка:
-
-1. **Локално**: Прави промените и тествай
-2. **Commit**: `git add . && git commit -m "Описание"`
-3. **Push**: `git push origin main`
-4. **Deploy**: Използвай бързия deploy команда (Опция А)
-
-### За по-големи промени:
-
-1. **Локално**: Тествай всичко внимателно
-2. **Commit**: Commit-вай промените
-3. **Push**: Push към GitHub
-4. **Backup**: (Опционално) Backup на базата данни
-5. **Deploy**: Използвай пълния deploy скрипт (Опция Б)
-6. **Тест**: Провери сайта на https://stanchevisin.com
-7. **Rollback**: Ако нещо не работи, rollback с `git revert`
-
----
-
-## 🎯 Бърза справка (Quick Reference)
-
-```bash
-# Най-често използвана команда за deploy:
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  git pull && \
-  docker compose -f docker-compose.prod.yml exec -T stanchev-app npm run build && \
-  docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan optimize"
-
-# Или още по-кратко (създай alias):
-alias deploy-stanchev='ssh maire-atelier "cd /opt/projects/stanchev-metal-working && git pull && docker compose -f docker-compose.prod.yml exec -T stanchev-app npm run build && docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan optimize"'
-
-# След това просто:
-deploy-stanchev
-```
-
----
-
-## ⚠️ Важни забележки
-
-1. **Винаги тествай локално** преди да деплойваш
-2. **Не редактирай файлове директно на сървъра** - използвай git workflow
-3. **За production промени в .env** - редактирай директно на сървъра, но не ги commit-вай
-4. **Backup базата данни** преди големи промени
-5. **Проверявай логовете** след deploy за грешки
-
----
-
-## 🔄 Rollback (ако нещо се обърка)
-
-```bash
-# На сървъра
-ssh maire-atelier
-cd /opt/projects/stanchev-metal-working
-
-# Виж последните commits
-git log --oneline -5
-
-# Rollback към предишен commit
-git reset --hard <commit-hash>
-
-# Rebuild и restart
-docker compose -f docker-compose.prod.yml restart stanchev-app
-```
-
----
-
-## 🔥 Troubleshooting (Често срещани проблеми)
-
-### Проблем: 500 Server Error
-
-**Причина**: Обикновено permissions проблем със `storage` или `bootstrap/cache`
-
-**Решение**:
+### 500 Server Error
 ```bash
 ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
   sudo chown -R www-data:www-data storage bootstrap/cache && \
@@ -255,115 +26,41 @@ ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
   docker compose -f docker-compose.prod.yml restart stanchev-app"
 ```
 
-### Проблем: 404 Not Found на всички страници
-
-**Причина**: Nginx не може да намери файловете или проблем с routing
-
-**Решение**:
-```bash
-# Провери nginx конфигурацията
-ssh maire-atelier "cd /opt/projects/nginx-container && \
-  docker compose exec nginx nginx -t"
-
-# Рестартирай nginx
-ssh maire-atelier "cd /opt/projects/nginx-container && \
-  docker compose restart nginx"
-
-# Изчисти Laravel cache
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  docker compose -f docker-compose.prod.yml exec stanchev-app php artisan route:clear && \
-  docker compose -f docker-compose.prod.yml exec stanchev-app php artisan config:clear"
-```
-
-### Проблем: CSS/JS файловете не се зареждат
-
-**Причина**: Assets не са build-нати или има проблем с permissions
-
-**Решение**:
+### CSS не се зарежда
 ```bash
 ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  docker compose -f docker-compose.prod.yml exec stanchev-app npm run build && \
-  sudo chown -R www-data:www-data public/build"
+  sudo chown -R www-data:www-data public/build node_modules && \
+  docker compose -f docker-compose.prod.yml exec -T stanchev-app npm run build && \
+  docker compose -f docker-compose.prod.yml restart stanchev-app"
 ```
 
-### Проблем: "Permission denied" при git pull
-
-**Причина**: Git ownership проблем
-
-**Решение**:
+### Всичко е счупено (Nuclear option)
 ```bash
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  sudo chown -R ubuntu:ubuntu .git && \
-  git config --global --add safe.directory /opt/projects/stanchev-metal-working"
+ssh maire-atelier
+cd /opt/projects/stanchev-metal-working
+docker compose -f docker-compose.prod.yml down
+rm -rf vendor node_modules bootstrap/cache/*.php
+bash deploy.sh
 ```
 
-### Проблем: Контейнерът постоянно рестартира
+---
 
-**Причина**: Грешка в кода или конфигурацията
+## 📝 Логове
 
-**Решение**:
 ```bash
-# Виж логовете
+# Виж какво се случва
 ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  docker compose -f docker-compose.prod.yml logs --tail=100 stanchev-app"
-
-# Влез в контейнера за debugging
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  docker compose -f docker-compose.prod.yml exec stanchev-app bash"
+  docker compose -f docker-compose.prod.yml logs -f stanchev-app"
 ```
 
-### Проблем: Database connection error
+---
 
-**Причина**: MySQL не е стартирал или грешни credentials
-
-**Решение**:
-```bash
-# Провери MySQL статус
-ssh maire-atelier "docker ps | grep stanchev-db"
-
-# Провери MySQL логове
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  docker compose -f docker-compose.prod.yml logs stanchev-db"
-
-# Рестартирай базата данни
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
-  docker compose -f docker-compose.prod.yml restart stanchev-db"
-```
-
-### Универсално решение (Nuclear Option)
-
-Ако нищо друго не работи:
+## 🔄 Rollback
 
 ```bash
 ssh maire-atelier
 cd /opt/projects/stanchev-metal-working
-
-# Спри всичко
-docker compose -f docker-compose.prod.yml down
-
-# Поправи permissions
-sudo chown -R ubuntu:ubuntu .
-sudo chown -R www-data:www-data storage bootstrap/cache
-sudo chmod -R 775 storage bootstrap/cache
-
-# Изчисти всичко и започни отначало
-rm -rf vendor node_modules bootstrap/cache/*.php
-
-# Rebuild и restart
-docker compose -f docker-compose.prod.yml build --no-cache
-docker compose -f docker-compose.prod.yml up -d
-
-# Инсталирай зависимости
-docker compose -f docker-compose.prod.yml exec stanchev-app composer install --no-dev --optimize-autoloader
-docker compose -f docker-compose.prod.yml exec stanchev-app npm install
-docker compose -f docker-compose.prod.yml exec stanchev-app npm run build
-
-# Optimize Laravel
-docker compose -f docker-compose.prod.yml exec stanchev-app php artisan optimize
-
-# Рестартирай nginx
-cd /opt/projects/nginx-container
-docker compose restart nginx
+git log --oneline -5  # виж commits
+git reset --hard <commit-hash>
+bash deploy.sh
 ```
-```
-
