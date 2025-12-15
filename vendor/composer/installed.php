@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'metalworking/website',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => 'a2286730f9b28b08f7535424db9f4904bfadd789',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -434,9 +434,9 @@
             'dev_requirement' => false,
         ),
         'metalworking/website' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'a2286730f9b28b08f7535424db9f4904bfadd789',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
