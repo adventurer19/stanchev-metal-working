@@ -17,10 +17,15 @@ cd $PROJECT_DIR
 
 echo ""
 echo "📥 Git pull..."
+BEFORE_PULL=$(git rev-parse HEAD)
 git pull origin main
+AFTER_PULL=$(git rev-parse HEAD)
+
+# Check if Dockerfile or docker-compose changed in the pull
+CHANGED_FILES=$(git diff --name-only $BEFORE_PULL $AFTER_PULL 2>/dev/null || echo "")
 
 # Rebuild containers if flag is set or if Dockerfile/docker-compose changed
-if [ "$REBUILD" = true ] || git diff HEAD@{1} --name-only | grep -q -E "Dockerfile|docker-compose"; then
+if [ "$REBUILD" = true ] || echo "$CHANGED_FILES" | grep -q -E "Dockerfile|docker-compose"; then
     echo ""
     echo "🔨 Rebuilding Docker containers..."
     docker compose -f docker-compose.prod.yml down
