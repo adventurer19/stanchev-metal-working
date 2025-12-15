@@ -15,6 +15,11 @@ cd $PROJECT_DIR
 git pull origin main
 
 echo ""
+echo "🔧 Fixing permissions..."
+sudo chown -R www-data:www-data storage bootstrap/cache
+sudo chmod -R 775 storage bootstrap/cache
+
+echo ""
 echo "🔨 Building assets..."
 docker compose -f docker-compose.prod.yml exec -T stanchev-app npm run build
 

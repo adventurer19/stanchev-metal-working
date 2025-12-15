@@ -239,3 +239,131 @@ git reset --hard <commit-hash>
 docker compose -f docker-compose.prod.yml restart stanchev-app
 ```
 
+---
+
+## 🔥 Troubleshooting (Често срещани проблеми)
+
+### Проблем: 500 Server Error
+
+**Причина**: Обикновено permissions проблем със `storage` или `bootstrap/cache`
+
+**Решение**:
+```bash
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
+  sudo chown -R www-data:www-data storage bootstrap/cache && \
+  sudo chmod -R 775 storage bootstrap/cache && \
+  docker compose -f docker-compose.prod.yml restart stanchev-app"
+```
+
+### Проблем: 404 Not Found на всички страници
+
+**Причина**: Nginx не може да намери файловете или проблем с routing
+
+**Решение**:
+```bash
+# Провери nginx конфигурацията
+ssh maire-atelier "cd /opt/projects/nginx-container && \
+  docker compose exec nginx nginx -t"
+
+# Рестартирай nginx
+ssh maire-atelier "cd /opt/projects/nginx-container && \
+  docker compose restart nginx"
+
+# Изчисти Laravel cache
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
+  docker compose -f docker-compose.prod.yml exec stanchev-app php artisan route:clear && \
+  docker compose -f docker-compose.prod.yml exec stanchev-app php artisan config:clear"
+```
+
+### Проблем: CSS/JS файловете не се зареждат
+
+**Причина**: Assets не са build-нати или има проблем с permissions
+
+**Решение**:
+```bash
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
+  docker compose -f docker-compose.prod.yml exec stanchev-app npm run build && \
+  sudo chown -R www-data:www-data public/build"
+```
+
+### Проблем: "Permission denied" при git pull
+
+**Причина**: Git ownership проблем
+
+**Решение**:
+```bash
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
+  sudo chown -R ubuntu:ubuntu .git && \
+  git config --global --add safe.directory /opt/projects/stanchev-metal-working"
+```
+
+### Проблем: Контейнерът постоянно рестартира
+
+**Причина**: Грешка в кода или конфигурацията
+
+**Решение**:
+```bash
+# Виж логовете
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
+  docker compose -f docker-compose.prod.yml logs --tail=100 stanchev-app"
+
+# Влез в контейнера за debugging
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
+  docker compose -f docker-compose.prod.yml exec stanchev-app bash"
+```
+
+### Проблем: Database connection error
+
+**Причина**: MySQL не е стартирал или грешни credentials
+
+**Решение**:
+```bash
+# Провери MySQL статус
+ssh maire-atelier "docker ps | grep stanchev-db"
+
+# Провери MySQL логове
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
+  docker compose -f docker-compose.prod.yml logs stanchev-db"
+
+# Рестартирай базата данни
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && \
+  docker compose -f docker-compose.prod.yml restart stanchev-db"
+```
+
+### Универсално решение (Nuclear Option)
+
+Ако нищо друго не работи:
+
+```bash
+ssh maire-atelier
+cd /opt/projects/stanchev-metal-working
+
+# Спри всичко
+docker compose -f docker-compose.prod.yml down
+
+# Поправи permissions
+sudo chown -R ubuntu:ubuntu .
+sudo chown -R www-data:www-data storage bootstrap/cache
+sudo chmod -R 775 storage bootstrap/cache
+
+# Изчисти всичко и започни отначало
+rm -rf vendor node_modules bootstrap/cache/*.php
+
+# Rebuild и restart
+docker compose -f docker-compose.prod.yml build --no-cache
+docker compose -f docker-compose.prod.yml up -d
+
+# Инсталирай зависимости
+docker compose -f docker-compose.prod.yml exec stanchev-app composer install --no-dev --optimize-autoloader
+docker compose -f docker-compose.prod.yml exec stanchev-app npm install
+docker compose -f docker-compose.prod.yml exec stanchev-app npm run build
+
+# Optimize Laravel
+docker compose -f docker-compose.prod.yml exec stanchev-app php artisan optimize
+
+# Рестартирай nginx
+cd /opt/projects/nginx-container
+docker compose restart nginx
+```
+```
+
