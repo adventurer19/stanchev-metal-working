@@ -28,24 +28,7 @@ echo -e "${YELLOW}Step 3: Cleaning old dependencies...${NC}"
 rm -rf vendor node_modules bootstrap/cache/*.php
 
 echo ""
-echo -e "${YELLOW}Step 4: Installing Composer dependencies...${NC}"
-composer install --no-dev --optimize-autoloader --no-interaction
-
-echo ""
-echo -e "${YELLOW}Step 5: Installing NPM dependencies...${NC}"
-npm install
-
-echo ""
-echo -e "${YELLOW}Step 6: Building assets...${NC}"
-npm run build
-
-echo ""
-echo -e "${YELLOW}Step 7: Setting correct permissions...${NC}"
-sudo chown -R www-data:www-data storage bootstrap/cache
-sudo chmod -R 775 storage bootstrap/cache
-
-echo ""
-echo -e "${YELLOW}Step 8: Updating nginx upstream configuration...${NC}"
+echo -e "${YELLOW}Step 4: Updating nginx upstream configuration...${NC}"
 cd $NGINX_DIR
 # Backup current config
 cp nginx/conf.d/upstreams.conf nginx/conf.d/upstreams.conf.bak.$(date +%Y%m%d_%H%M%S)
@@ -54,14 +37,31 @@ sed -i 's/stanchev-metal-working-stanchev-app-1/stanchev-app/g' nginx/conf.d/ups
 echo -e "${GREEN}✓ Upstream configuration updated${NC}"
 
 echo ""
-echo -e "${YELLOW}Step 9: Building and starting containers...${NC}"
+echo -e "${YELLOW}Step 5: Building and starting containers...${NC}"
 cd $PROJECT_DIR
 docker compose -f docker-compose.prod.yml build --no-cache
 docker compose -f docker-compose.prod.yml up -d
 
 echo ""
-echo -e "${YELLOW}Step 10: Waiting for containers to be healthy...${NC}"
-sleep 10
+echo -e "${YELLOW}Step 6: Waiting for database to be ready...${NC}"
+sleep 15
+
+echo ""
+echo -e "${YELLOW}Step 7: Installing Composer dependencies inside container...${NC}"
+docker compose -f docker-compose.prod.yml exec -T stanchev-app composer install --no-dev --optimize-autoloader --no-interaction
+
+echo ""
+echo -e "${YELLOW}Step 8: Installing NPM dependencies inside container...${NC}"
+docker compose -f docker-compose.prod.yml exec -T stanchev-app npm install
+
+echo ""
+echo -e "${YELLOW}Step 9: Building assets inside container...${NC}"
+docker compose -f docker-compose.prod.yml exec -T stanchev-app npm run build
+
+echo ""
+echo -e "${YELLOW}Step 10: Setting correct permissions...${NC}"
+sudo chown -R www-data:www-data storage bootstrap/cache public/build
+sudo chmod -R 775 storage bootstrap/cache
 
 echo ""
 echo -e "${YELLOW}Step 11: Running Laravel optimization commands...${NC}"
