@@ -11,7 +11,7 @@
     <link rel="alternate icon" href="{{ asset('favicon-optimized.svg') }}">
     <link rel="apple-touch-icon" href="{{ asset('favicon-optimized.svg') }}">
     
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
 </head>
 <body class="antialiased bg-slate-950 text-slate-100">
     <!-- Navigation -->
