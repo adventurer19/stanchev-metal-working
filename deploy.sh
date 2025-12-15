@@ -1,89 +1,118 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Starting deployment of Stanchev Metalworking..."
+echo "🚀 Stanchev Metalworking - Production Deployment Script"
+echo "========================================================"
 
 # Colors for output
+RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+# Configuration
 PROJECT_DIR="/opt/projects/stanchev-metal-working"
 NGINX_DIR="/opt/projects/nginx-container"
 
-# Step 1: Stop current containers
-echo -e "${YELLOW}📦 Stopping current containers...${NC}"
+echo ""
+echo -e "${YELLOW}Step 1: Stopping existing containers...${NC}"
 cd $PROJECT_DIR
 docker compose -f docker-compose.prod.yml down || true
 
-# Step 2: Pull latest changes
-echo -e "${YELLOW}📥 Pulling latest changes from git...${NC}"
+echo ""
+echo -e "${YELLOW}Step 2: Pulling latest code from Git...${NC}"
 git pull origin main
 
-# Step 3: Clean up old dependencies (with sudo for docker-created files)
-echo -e "${YELLOW}🧹 Cleaning up old dependencies...${NC}"
-sudo rm -rf vendor node_modules public/build
-sudo rm -f bootstrap/cache/packages.php bootstrap/cache/services.php storage/framework/cache/data/* 2>/dev/null || true
+echo ""
+echo -e "${YELLOW}Step 3: Cleaning old dependencies...${NC}"
+rm -rf vendor node_modules bootstrap/cache/*.php
 
-# Step 4: Update nginx upstream configuration FIRST
-echo -e "${YELLOW}🔧 Updating nginx upstream configuration...${NC}"
+echo ""
+echo -e "${YELLOW}Step 4: Installing Composer dependencies...${NC}"
+composer install --no-dev --optimize-autoloader --no-interaction
+
+echo ""
+echo -e "${YELLOW}Step 5: Installing NPM dependencies...${NC}"
+npm install
+
+echo ""
+echo -e "${YELLOW}Step 6: Building assets...${NC}"
+npm run build
+
+echo ""
+echo -e "${YELLOW}Step 7: Setting correct permissions...${NC}"
+sudo chown -R www-data:www-data storage bootstrap/cache
+sudo chmod -R 775 storage bootstrap/cache
+
+echo ""
+echo -e "${YELLOW}Step 8: Updating nginx upstream configuration...${NC}"
 cd $NGINX_DIR
-sed -i.bak 's/stanchev-metal-working-stanchev-app-1/stanchev-app/g' nginx/conf.d/upstreams.conf
+# Backup current config
+cp nginx/conf.d/upstreams.conf nginx/conf.d/upstreams.conf.bak.$(date +%Y%m%d_%H%M%S)
+# Update container name
+sed -i 's/stanchev-metal-working-stanchev-app-1/stanchev-app/g' nginx/conf.d/upstreams.conf
+echo -e "${GREEN}✓ Upstream configuration updated${NC}"
 
-# Step 5: Build and start containers
-echo -e "${YELLOW}🐳 Building and starting Docker containers...${NC}"
+echo ""
+echo -e "${YELLOW}Step 9: Building and starting containers...${NC}"
 cd $PROJECT_DIR
 docker compose -f docker-compose.prod.yml build --no-cache
 docker compose -f docker-compose.prod.yml up -d
 
-# Step 6: Wait for database to be ready
-echo -e "${YELLOW}⏳ Waiting for database to be ready...${NC}"
-sleep 15
+echo ""
+echo -e "${YELLOW}Step 10: Waiting for containers to be healthy...${NC}"
+sleep 10
 
-# Step 7: Install Composer dependencies INSIDE container
-echo -e "${YELLOW}📦 Installing Composer dependencies inside container...${NC}"
-docker compose -f docker-compose.prod.yml exec -T stanchev-app composer install --no-dev --optimize-autoloader --no-interaction
-
-# Step 8: Install npm dependencies and build assets INSIDE container
-echo -e "${YELLOW}📦 Installing npm dependencies inside container...${NC}"
-docker compose -f docker-compose.prod.yml exec -T stanchev-app npm install
-
-echo -e "${YELLOW}🔨 Building assets inside container...${NC}"
-docker compose -f docker-compose.prod.yml exec -T stanchev-app npm run build
-
-# Step 9: Laravel optimizations INSIDE container
-echo -e "${YELLOW}⚙️  Running Laravel optimizations...${NC}"
+echo ""
+echo -e "${YELLOW}Step 11: Running Laravel optimization commands...${NC}"
 docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan config:cache
 docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan route:cache
 docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan view:cache
 
-# Step 10: Check container status
-echo -e "${YELLOW}🔍 Checking container status...${NC}"
-docker ps | grep stanchev
+echo ""
+echo -e "${YELLOW}Step 12: Running database migrations...${NC}"
+read -p "Do you want to run migrations? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan migrate --force
+    echo -e "${GREEN}✓ Migrations completed${NC}"
+else
+    echo -e "${YELLOW}⊘ Migrations skipped${NC}"
+fi
 
-# Step 11: Fix permissions
-echo -e "${YELLOW}🔐 Fixing file permissions...${NC}"
-cd $PROJECT_DIR
-sudo chown -R www-data:www-data storage bootstrap/cache
-sudo chmod -R 775 storage bootstrap/cache
-
-# Step 12: Restart nginx
-echo -e "${YELLOW}🔄 Restarting nginx...${NC}"
+echo ""
+echo -e "${YELLOW}Step 13: Restarting nginx...${NC}"
 cd $NGINX_DIR
 docker compose restart nginx
 
-# Step 13: Test nginx configuration
-echo -e "${YELLOW}✅ Testing nginx configuration...${NC}"
+echo ""
+echo -e "${YELLOW}Step 14: Testing nginx configuration...${NC}"
 docker compose exec nginx nginx -t
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}✓ Nginx configuration is valid${NC}"
+else
+    echo -e "${RED}✗ Nginx configuration has errors!${NC}"
+    exit 1
+fi
 
-echo -e "${GREEN}✅ Deployment completed successfully!${NC}"
 echo ""
-echo "📊 Container status:"
-docker ps | grep -E '(CONTAINER|stanchev|nginx-proxy)'
-echo ""
-echo "📝 To view logs, run:"
-echo "   docker logs -f stanchev-app"
-echo ""
-echo "🌐 Site should be available at: https://stanchevisin.com"
+echo -e "${GREEN}========================================${NC}"
+echo -e "${GREEN}✓ Deployment completed successfully!${NC}"
+echo -e "${GREEN}========================================${NC}"
 
+echo ""
+echo "Container status:"
+docker ps | grep -E '(nginx-proxy|stanchev)'
+
+echo ""
+echo "Checking logs (last 20 lines):"
+cd $PROJECT_DIR
+docker compose -f docker-compose.prod.yml logs --tail=20 stanchev-app
+
+echo ""
+echo -e "${YELLOW}Useful commands:${NC}"
+echo "  View logs:    cd $PROJECT_DIR && docker compose -f docker-compose.prod.yml logs -f stanchev-app"
+echo "  Restart app:  cd $PROJECT_DIR && docker compose -f docker-compose.prod.yml restart stanchev-app"
+echo "  Shell access: cd $PROJECT_DIR && docker compose -f docker-compose.prod.yml exec stanchev-app bash"
+echo ""
+echo -e "${GREEN}Visit: https://stanchevisin.com${NC}"
