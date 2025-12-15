@@ -2,6 +2,7 @@
 
 ## 🚀 Как да деплойваш
 
+### Обикновен deploy (код, CSS, templates)
 ```bash
 # 1. Локално - commit промените
 git add .
@@ -10,6 +11,11 @@ git push origin main
 
 # 2. Deploy
 ssh maire-atelier "cd /opt/projects/stanchev-metal-working && bash deploy.sh"
+```
+
+### Deploy с rebuild (промени в Dockerfile или docker-compose)
+```bash
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && bash deploy.sh --rebuild"
 ```
 
 **Готово!** Толкова е просто.

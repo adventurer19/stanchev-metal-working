@@ -26,24 +26,18 @@ npm run dev
 
 ## Production Deployment
 
-### 🚀 Deploy (един команда)
-
 ```bash
 # Локално
 git add .
 git commit -m "Промени"
-git push origin main
+git push
 
 # Deploy
 ssh maire-atelier "cd /opt/projects/stanchev-metal-working && bash deploy.sh"
-```
 
-Това е! Скриптът автоматично:
-- Pull-ва кода
-- Поправя permissions
-- Build-ва assets
-- Optimize-ва Laravel
-- Restart-ва app
+# Deploy с rebuild (ако промениш Dockerfile)
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && bash deploy.sh --rebuild"
+```
 
 Виж **[DEPLOYMENT.md](DEPLOYMENT.md)** за troubleshooting
 

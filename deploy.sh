@@ -6,11 +6,29 @@ echo "=================================="
 
 PROJECT_DIR="/opt/projects/stanchev-metal-working"
 
+# Check if --rebuild flag is passed
+REBUILD=false
+if [[ "$1" == "--rebuild" ]]; then
+    REBUILD=true
+    echo "⚠️  REBUILD MODE - Will rebuild Docker containers"
+fi
+
 cd $PROJECT_DIR
 
 echo ""
 echo "📥 Git pull..."
 git pull origin main
+
+# Rebuild containers if flag is set or if Dockerfile/docker-compose changed
+if [ "$REBUILD" = true ] || git diff HEAD@{1} --name-only | grep -q -E "Dockerfile|docker-compose"; then
+    echo ""
+    echo "🔨 Rebuilding Docker containers..."
+    docker compose -f docker-compose.prod.yml down
+    docker compose -f docker-compose.prod.yml build --no-cache
+    docker compose -f docker-compose.prod.yml up -d
+    echo "⏳ Waiting for containers to start..."
+    sleep 10
+fi
 
 echo ""
 echo "🔧 Fix permissions..."
