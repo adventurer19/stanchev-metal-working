@@ -24,28 +24,44 @@ npm run dev
 
 **Достъп**: http://localhost:8080
 
-## Production (на сървъра)
+## Production Deployment
 
-### Важно
-
-- На сървъра се използва `docker-compose.prod.yml` (БЕЗ nginx контейнер)
-- Nginx се управлява от общия контейнер в `maire-atelier` проекта
-- Виж `DEPLOYMENT.md` за пълни инструкции
-
-### Бърз старт на сървъра
+### 🚀 Бърз Deploy (ежедневни промени)
 
 ```bash
-ssh maire-atelier
-cd /opt/projects/stanchev-metal-working
-docker compose -f docker-compose.prod.yml up -d --build
+# От твоя локален компютър
+git add .
+git commit -m "Описание на промените"
+git push origin main
+
+# Deploy на сървъра
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && bash quick-deploy.sh"
 ```
+
+### 🔧 Пълен Deploy (с нови зависимости)
+
+```bash
+ssh maire-atelier "cd /opt/projects/stanchev-metal-working && bash deploy.sh"
+```
+
+### 📚 Пълна документация
+
+Виж **[DEPLOYMENT.md](DEPLOYMENT.md)** за:
+- Различни deployment сценарии
+- Troubleshooting
+- Rollback процедури
+- Best practices
 
 ## Структура на файловете
 
+### Docker & Deployment
 - `docker-compose.yml` - за локална разработка (с nginx)
 - `docker-compose.prod.yml` - за production (без nginx)
-- `docker/nginx/default.conf` - nginx конфиг за локална разработка
-- `docker/nginx/production.conf` - nginx конфиг за сървъра (добавя се към maire-atelier nginx)
+- `Dockerfile` - PHP-FPM контейнер конфигурация
+- `deploy.sh` - Пълен deployment скрипт
+- `quick-deploy.sh` - Бърз deployment за ежедневни промени
+- `DEPLOYMENT.md` - Пълна deployment документация
+- `SERVER_SETUP.md` - Първоначална настройка на сървъра
 
 ## Полезни команди
 
