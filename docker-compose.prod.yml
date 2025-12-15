@@ -1,6 +1,3 @@
-# Production docker-compose - БЕЗ nginx контейнер
-# На сървъра се използва общият nginx контейнер от maire-atelier проекта
-
 services:
   app:
     build:
@@ -42,7 +39,7 @@ services:
 
 networks:
   app:
-    external: true  # Използва съществуващата мрежа от maire-atelier
+    external: true
 
 volumes:
   stanchev-metalworking-mysql-data:
