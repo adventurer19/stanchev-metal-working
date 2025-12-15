@@ -3,13 +3,77 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ __('Прецизна металообработка и индустриални решения в България') }}">
+    
+    <!-- SEO Meta Tags -->
     <title>@yield('title', __('Станчев и Син 2025 ЕООД - Прецизна металообработка'))</title>
+    <meta name="description" content="@yield('description', __('Прецизна металообработка и индустриални решения в България. Професионални услуги по металообработка, заваряване и производство на метални конструкции.'))">
+    <meta name="keywords" content="@yield('keywords', __('металообработка, заваряване, метални конструкции, индустриални решения, България, Плевен'))">
+    <meta name="author" content="Станчев и Син 2025 ЕООД">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="{{ url()->current() }}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="@yield('og_title', __('Станчев и Син 2025 ЕООД - Прецизна металообработка'))">
+    <meta property="og:description" content="@yield('og_description', __('Прецизна металообработка и индустриални решения в България'))">
+    <meta property="og:image" content="{{ asset('metalworking-images/precision-metal-working.png') }}">
+    <meta property="og:locale" content="{{ app()->getLocale() === 'bg' ? 'bg_BG' : 'en_US' }}">
+    <meta property="og:site_name" content="Станчев и Син 2025 ЕООД">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="@yield('twitter_title', __('Станчев и Син 2025 ЕООД - Прецизна металообработка'))">
+    <meta name="twitter:description" content="@yield('twitter_description', __('Прецизна металообработка и индустриални решения в България'))">
+    <meta name="twitter:image" content="{{ asset('metalworking-images/precision-metal-working.png') }}">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon-optimized.svg') }}">
     <link rel="alternate icon" href="{{ asset('favicon-optimized.svg') }}">
     <link rel="apple-touch-icon" href="{{ asset('favicon-optimized.svg') }}">
+    
+    <!-- Alternate Languages -->
+    <link rel="alternate" hreflang="bg" href="{{ url('/') }}?locale=bg">
+    <link rel="alternate" hreflang="en" href="{{ url('/') }}?locale=en">
+    <link rel="alternate" hreflang="x-default" href="{{ url('/') }}">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Станчев и Син 2025 ЕООД",
+        "image": "{{ asset('metalworking-images/precision-metal-working.png') }}",
+        "description": "{{ __('Прецизна металообработка и индустриални решения в България') }}",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "бул. Столетов 162",
+            "addressLocality": "Плевен",
+            "addressRegion": "Плевен",
+            "postalCode": "5800",
+            "addressCountry": "BG"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "43.4170",
+            "longitude": "24.6167"
+        },
+        "url": "{{ url('/') }}",
+        "telephone": "+359778550 70",
+        "email": "stanchev_sin2025@abv.bg",
+        "priceRange": "$$",
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "08:00",
+                "closes": "17:00"
+            }
+        ],
+        "sameAs": []
+    }
+    </script>
     
     @vite(['resources/css/app.css'])
 </head>

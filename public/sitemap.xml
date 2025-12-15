@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Home Page -->
+    <url>
+        <loc>https://stanchevisin.com/</loc>
+        <lastmod>2025-12-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="bg" href="https://stanchevisin.com/?locale=bg"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://stanchevisin.com/?locale=en"/>
+    </url>
+    
+    <!-- About Page -->
+    <url>
+        <loc>https://stanchevisin.com/about</loc>
+        <lastmod>2025-12-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="bg" href="https://stanchevisin.com/about?locale=bg"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://stanchevisin.com/about?locale=en"/>
+    </url>
+    
+    <!-- Why Us Page -->
+    <url>
+        <loc>https://stanchevisin.com/why-us</loc>
+        <lastmod>2025-12-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="bg" href="https://stanchevisin.com/why-us?locale=bg"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://stanchevisin.com/why-us?locale=en"/>
+    </url>
+    
+    <!-- Contact Page -->
+    <url>
+        <loc>https://stanchevisin.com/contact</loc>
+        <lastmod>2025-12-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="bg" href="https://stanchevisin.com/contact?locale=bg"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://stanchevisin.com/contact?locale=en"/>
+    </url>
+    
+</urlset>
+
