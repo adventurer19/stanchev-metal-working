@@ -40,39 +40,39 @@
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Станчев и Син 2025 ЕООД",
-        "image": "{{ asset('metalworking-images/precision-metal-working.png') }}",
-        "description": "{{ __('Прецизна металообработка и индустриални решения в България') }}",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "бул. Столетов 162",
-            "addressLocality": "Плевен",
-            "addressRegion": "Плевен",
-            "postalCode": "5800",
-            "addressCountry": "BG"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "43.4170",
-            "longitude": "24.6167"
-        },
-        "url": "{{ url('/') }}",
-        "telephone": "+359778550 70",
-        "email": "stanchev_sin2025@abv.bg",
-        "priceRange": "$$",
-        "openingHoursSpecification": [
-            {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                "opens": "08:00",
-                "closes": "17:00"
-            }
+    @php
+    echo json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'LocalBusiness',
+        'name' => 'Станчев и Син 2025 ЕООД',
+        'image' => asset('metalworking-images/precision-metal-working.png'),
+        'description' => __('Прецизна металообработка и индустриални решения в България'),
+        'address' => [
+            '@type' => 'PostalAddress',
+            'streetAddress' => 'бул. Столетов 162',
+            'addressLocality' => 'Плевен',
+            'addressRegion' => 'Плевен',
+            'postalCode' => '5800',
+            'addressCountry' => 'BG'
         ],
-        "sameAs": []
-    }
+        'geo' => [
+            '@type' => 'GeoCoordinates',
+            'latitude' => '43.4170',
+            'longitude' => '24.6167'
+        ],
+        'url' => url('/'),
+        'telephone' => '+35977855070',
+        'email' => 'stanchev_sin2025@abv.bg',
+        'priceRange' => '$$',
+        'openingHoursSpecification' => [[
+            '@type' => 'OpeningHoursSpecification',
+            'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+            'opens' => '08:00',
+            'closes' => '17:00'
+        ]],
+        'sameAs' => []
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    @endphp
     </script>
     
     @vite(['resources/css/app.css'])
