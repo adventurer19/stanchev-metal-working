@@ -23,51 +23,57 @@ git pull origin main
 
 # Step 3: Clean up old dependencies (with sudo for docker-created files)
 echo -e "${YELLOW}🧹 Cleaning up old dependencies...${NC}"
-sudo rm -rf vendor node_modules
-sudo rm -f bootstrap/cache/packages.php bootstrap/cache/services.php
+sudo rm -rf vendor node_modules public/build
+sudo rm -f bootstrap/cache/packages.php bootstrap/cache/services.php storage/framework/cache/data/* 2>/dev/null || true
 
-# Step 4: Install Composer dependencies
-echo -e "${YELLOW}📦 Installing Composer dependencies...${NC}"
-composer install --no-dev --optimize-autoloader --no-interaction
-
-# Step 5: Install npm dependencies and build assets
-echo -e "${YELLOW}📦 Installing npm dependencies...${NC}"
-npm install
-
-echo -e "${YELLOW}🔨 Building assets...${NC}"
-npm run build
-
-# Step 6: Laravel optimizations
-echo -e "${YELLOW}⚙️  Running Laravel optimizations...${NC}"
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-
-# Step 7: Update nginx upstream configuration
+# Step 4: Update nginx upstream configuration FIRST
 echo -e "${YELLOW}🔧 Updating nginx upstream configuration...${NC}"
 cd $NGINX_DIR
 sed -i.bak 's/stanchev-metal-working-stanchev-app-1/stanchev-app/g' nginx/conf.d/upstreams.conf
 
-# Step 8: Build and start containers
+# Step 5: Build and start containers
 echo -e "${YELLOW}🐳 Building and starting Docker containers...${NC}"
 cd $PROJECT_DIR
 docker compose -f docker-compose.prod.yml build --no-cache
 docker compose -f docker-compose.prod.yml up -d
 
-# Step 9: Wait for containers to be healthy
-echo -e "${YELLOW}⏳ Waiting for containers to be ready...${NC}"
-sleep 10
+# Step 6: Wait for database to be ready
+echo -e "${YELLOW}⏳ Waiting for database to be ready...${NC}"
+sleep 15
+
+# Step 7: Install Composer dependencies INSIDE container
+echo -e "${YELLOW}📦 Installing Composer dependencies inside container...${NC}"
+docker compose -f docker-compose.prod.yml exec -T stanchev-app composer install --no-dev --optimize-autoloader --no-interaction
+
+# Step 8: Install npm dependencies and build assets INSIDE container
+echo -e "${YELLOW}📦 Installing npm dependencies inside container...${NC}"
+docker compose -f docker-compose.prod.yml exec -T stanchev-app npm install
+
+echo -e "${YELLOW}🔨 Building assets inside container...${NC}"
+docker compose -f docker-compose.prod.yml exec -T stanchev-app npm run build
+
+# Step 9: Laravel optimizations INSIDE container
+echo -e "${YELLOW}⚙️  Running Laravel optimizations...${NC}"
+docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan config:cache
+docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan route:cache
+docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan view:cache
 
 # Step 10: Check container status
 echo -e "${YELLOW}🔍 Checking container status...${NC}"
 docker ps | grep stanchev
 
-# Step 11: Restart nginx
+# Step 11: Fix permissions
+echo -e "${YELLOW}🔐 Fixing file permissions...${NC}"
+cd $PROJECT_DIR
+sudo chown -R www-data:www-data storage bootstrap/cache
+sudo chmod -R 775 storage bootstrap/cache
+
+# Step 12: Restart nginx
 echo -e "${YELLOW}🔄 Restarting nginx...${NC}"
 cd $NGINX_DIR
 docker compose restart nginx
 
-# Step 12: Test nginx configuration
+# Step 13: Test nginx configuration
 echo -e "${YELLOW}✅ Testing nginx configuration...${NC}"
 docker compose exec nginx nginx -t
 
