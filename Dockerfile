@@ -21,8 +21,9 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy existing application directory permissions
-RUN chown -R www-data:www-data /var/www/html
+# Create www-data home directory for composer cache
+RUN mkdir -p /var/www/.cache /var/www/.config && \
+    chown -R www-data:www-data /var/www
 
 # Change current user to www-data
 USER www-data
@@ -30,4 +31,3 @@ USER www-data
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
-
