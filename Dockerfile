@@ -17,8 +17,12 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
-COPY . .
-RUN npm run build
+COPY vite.config.js postcss.config.js tailwind.config.js ./
+COPY resources ./resources
+COPY public ./public
+
+RUN npm run build \
+ && rm -rf node_modules
 
 
 # ---------- Runtime (PHP-FPM only) ----------
