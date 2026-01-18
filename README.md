@@ -26,20 +26,47 @@ npm run dev
 
 ## Production Deployment
 
+### Normal Deploy
+
 ```bash
-# Локално
+# Локално: Commit и push
 git add .
-git commit -m "Промени"
-git push
+git commit -m "Your changes"
+git push origin main
 
-# Deploy
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && bash deploy.sh"
-
-# Deploy с rebuild (ако промениш Dockerfile)
-ssh maire-atelier "cd /opt/projects/stanchev-metal-working && bash deploy.sh --rebuild"
+# Production: SSH и deploy
+ssh ubuntu@ip-172-31-16-63
+cd /opt/projects/stanchev-metal-working
+bash deploy.sh
 ```
 
-Виж **[DEPLOYMENT.md](DEPLOYMENT.md)** за troubleshooting
+### 🚨 Emergency Fixes
+
+**Corrupted vendor/ error:**
+```bash
+bash emergency-fix-vendor.sh
+bash deploy.sh
+```
+
+**Permission denied:**
+```bash
+sudo chown -R ubuntu:ubuntu /opt/projects/stanchev-metal-working
+bash deploy.sh
+```
+
+**Deploy with rebuild:**
+```bash
+bash deploy.sh --rebuild
+```
+
+### 📚 Documentation
+
+- **[DEPLOY_GUIDE.md](DEPLOY_GUIDE.md)** - Complete deployment guide
+- **[DEPLOYMENT_PERMISSIONS.md](DEPLOYMENT_PERMISSIONS.md)** - Permission issues & fixes
+- **[QUICK_FIX_PERMISSIONS.md](QUICK_FIX_PERMISSIONS.md)** - Quick reference
+- **[EMAIL_SETUP_COMPLETE.md](EMAIL_SETUP_COMPLETE.md)** - Email system docs
+
+**Production URL**: https://stanchevisin.com
 
 ## Структура на файловете
 

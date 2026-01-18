@@ -16,6 +16,11 @@ fi
 cd $PROJECT_DIR
 
 echo ""
+echo "🔧 Fix permissions before git operations..."
+sudo chown -R ubuntu:ubuntu .git .gitignore 2>/dev/null || true
+sudo chown ubuntu:ubuntu . 2>/dev/null || true
+
+echo ""
 echo "📥 Git pull..."
 BEFORE_PULL=$(git rev-parse HEAD)
 git pull origin main
@@ -37,9 +42,23 @@ fi
 
 echo ""
 echo "🔧 Fix permissions..."
-sudo chown -R www-data:www-data storage bootstrap/cache node_modules public/build vendor 2>/dev/null || true
+# First, make ubuntu owner of source files
+sudo chown -R ubuntu:ubuntu . 2>/dev/null || true
+# Then, make www-data owner of writable directories
+sudo chown -R www-data:www-data storage bootstrap/cache 2>/dev/null || true
 sudo chmod -R 775 storage bootstrap/cache 2>/dev/null || true
-sudo chown -R ubuntu:ubuntu .git 2>/dev/null || true
+# If node_modules, public/build, vendor exist, fix them too
+[ -d "node_modules" ] && sudo chown -R www-data:www-data node_modules 2>/dev/null || true
+[ -d "public/build" ] && sudo chown -R www-data:www-data public/build 2>/dev/null || true
+[ -d "vendor" ] && sudo chown -R www-data:www-data vendor 2>/dev/null || true
+
+echo ""
+echo "📦 Install Composer dependencies..."
+docker compose -f docker-compose.prod.yml exec -T stanchev-app composer install --no-dev --optimize-autoloader
+
+echo ""
+echo "📦 Install NPM dependencies..."
+docker compose -f docker-compose.prod.yml exec -T stanchev-app npm ci --omit=dev
 
 echo ""
 echo "🔨 Build assets..."
@@ -51,7 +70,9 @@ docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan optim
 
 echo ""
 echo "🔧 Fix permissions again..."
-sudo chown -R www-data:www-data storage bootstrap/cache node_modules public/build vendor 2>/dev/null || true
+sudo chown -R www-data:www-data storage bootstrap/cache 2>/dev/null || true
+sudo chmod -R 775 storage bootstrap/cache 2>/dev/null || true
+[ -d "public/build" ] && sudo chown -R www-data:www-data public/build 2>/dev/null || true
 
 echo ""
 echo "🔄 Restart app..."
