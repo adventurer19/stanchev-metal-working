@@ -1,0 +1,59 @@
+Как работи Vite тук
+1️⃣ Конфигурация (vite.config.js)
+vite.config.js
+Lines 5-16
+    plugins: [        laravel({            input: [                'resources/css/app.css',            ],            refresh: [                'resources/views/**',                'routes/**',                'app/**',            ],        }),    ],
+Какво прави:
+Input файлове: Vite взима resources/css/app.css (Tailwind CSS)
+Hot Module Replacement (HMR): Автоматично презарежда страницата когато се променят файлове в resources/views/**, routes/**, app/**
+2️⃣ Процес на Build (Production)
+Когато пуснеш npm run build:
+npm run build# Това изпълнява: vite build
+Vite прави:
+✅ Взима resources/css/app.css
+✅ Обработва Tailwind директивите (@tailwind base/components/utilities)
+✅ Минифицира CSS
+✅ Добавя hash към файловите имена за cache busting
+✅ Генерира файлове в public/build/assets/:
+app-C5HAYJYp.css (хашираното име)
+✅ Създава manifest.json с мапинг на файловете
+3️⃣ Как Laravel го използва (app.blade.php)
+app.blade.php
+Lines 78-78
+    @vite(['resources/css/app.css'])
+Blade директивата @vite():
+В development (npm run dev): Зарежда файловете директно от Vite dev server (с HMR)
+В production: Чете manifest.json и зарежда минифицираните файлове от public/build/assets/
+4️⃣ Tailwind CSS интеграция
+app.css
+Lines 3-5
+@tailwind base;@tailwind components;@tailwind utilities;
+Процесът:
+Vite → PostCSS → Tailwind
+Tailwind сканира файловете от tailwind.config.js:
+tailwind.config.js
+Lines 3-6
+    content: [        "./resources/**/*.blade.php",        "./resources/**/*.js",    ],
+Генерира само CSS класовете, които реално се използват в проекта (tree-shaking)
+5️⃣ Production Build резултат
+{  "resources/css/app.css": {    "file": "assets/app-C5HAYJYp.css",    "src": "resources/css/app.css",    "isEntry": true  }}
+Manifest.json казва на Laravel:
+"Когато някой иска resources/css/app.css, зареди assets/app-C5HAYJYp.css"
+🔧 Команди за работа
+Development (с Hot Reload):
+npm run dev
+Стартира Vite dev server на порт 5173
+HMR работи - промените се виждат веднага без refresh
+Production Build:
+npm run build
+Оптимизира и минифицира всичко
+Генерира хаширани файлове в public/build/
+Preview на Production Build:
+npm run preview
+Превюва production build локално
+🎯 Защо е добре това setup:
+✅ Бърз развой - HMR работи за секунди
+✅ Оптимизиран CSS - Само използваните Tailwind класове
+✅ Cache busting - Хашове във файловите имена
+✅ Автоматично - Laravel автоматично избира правилните файлове
+✅ Modern tooling - ESM, TypeScript ready, много бърз

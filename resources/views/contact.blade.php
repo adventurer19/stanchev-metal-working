@@ -70,7 +70,7 @@
                         <textarea id="message" name="message" rows="5" required 
                                   class="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all duration-300 resize-none">{{ old('message') }}</textarea>
                     </div>
-                    <button type="submit" class="w-full btn-primary" disabled>
+                    <button type="submit" class="w-full btn-primary">
                         {{ __('Изпрати съобщение') }}
                     </button>
                 </form>
@@ -99,7 +99,7 @@
                             </div>
                             <div>
                                 <p class="text-sm sm:text-base text-slate-300 font-semibold mb-1">{{ __('Телефон') }}</p>
-                                <a href="tel:+35977855070" class="text-sm sm:text-base text-accent-400 hover:text-accent-300 transition-colors duration-300">+359 77855070</a>
+                                <a href="tel:{{ str_replace(' ', '', config('app.company.phone')) }}" class="text-sm sm:text-base text-accent-400 hover:text-accent-300 transition-colors duration-300">{{ config('app.company.phone') }}</a>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3 sm:space-x-4">
@@ -110,7 +110,7 @@
                             </div>
                             <div>
                                 <p class="text-sm sm:text-base text-slate-300 font-semibold mb-1">{{ __('Имейл') }}</p>
-                                <a href="mailto:stanchev_sin2025@abv.bg" class="text-sm sm:text-base text-accent-400 hover:text-accent-300 transition-colors duration-300 break-all">stanchev_sin2025@abv.bg</a>
+                                <a href="mailto:{{ config('app.company.email') }}" class="text-sm sm:text-base text-accent-400 hover:text-accent-300 transition-colors duration-300 break-all">{{ config('app.company.email') }}</a>
                             </div>
                         </div>
                     </div>

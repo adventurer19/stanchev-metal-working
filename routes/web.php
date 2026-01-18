@@ -60,7 +60,7 @@ Route::get('/about', function () {
         }
     }
     
-    return view('portfolio', ['products' => $products]);
+    return view('about', ['products' => $products]);
 })->name('about');
 
 // Redirect /portfolio to /about for backwards compatibility
@@ -97,23 +97,17 @@ Route::post('/contact', function (\Illuminate\Http\Request $request) {
         $data = [
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone ?? __('Не е посочен'),
-            'message' => $request->message,
+            'phone' => $request->phone,
+            'messageContent' => $request->message,
+            'timestamp' => now()->format('d.m.Y H:i:s'),
         ];
 
-        // Изпращане на имейл
-        Mail::raw(
-            __('Ново съобщение от контактната форма') . "\n\n" .
-            __('Име') . ": {$data['name']}\n" .
-            __('Имейл') . ": {$data['email']}\n" .
-            __('Телефон') . ": {$data['phone']}\n\n" .
-            __('Съобщение') . ":\n{$data['message']}",
-            function ($message) use ($data) {
-                $message->to('stanchev_sin2025@abv.bg')
-                    ->subject(__('Ново съобщение от') . ' ' . $data['name'])
-                    ->replyTo($data['email'], $data['name']);
-            }
-        );
+        // Изпращане на имейл с HTML template
+        Mail::send('emails.contact', $data, function ($message) use ($data) {
+            $message->to(config('app.company.email'))
+                ->subject('Ново съобщение от ' . $data['name'])
+                ->replyTo($data['email'], $data['name']);
+        });
 
         return redirect()->route('contact')->with('success', __('Съобщението е изпратено успешно!'));
     } catch (\Exception $e) {

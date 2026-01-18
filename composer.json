@@ -3,9 +3,8 @@
     "type": "project",
     "description": "Metalworking company website",
     "require": {
-        "laravel/framework": "^12.39"
-    },
-    "require-dev": {
+        "laravel/framework": "^12.39",
+        "laravel/tinker": "^2.11"
     },
     "autoload": {
         "psr-4": {
@@ -49,5 +48,8 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require-dev": {
+        "phpunit/phpunit": "^12.5"
+    }
 }

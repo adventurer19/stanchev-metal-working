@@ -78,7 +78,7 @@
             </div>
             <div class="card card-hover group relative overflow-hidden">
                 <div class="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity">
-                    <img src="{{ asset('images-crafting/IMG_3659.jpeg') }}" alt="{{ __('Нишкова обработка') }}" class="w-full h-full object-cover">
+                    <img src="{{ asset('images-crafting/om-processing.jpeg') }}" alt="{{ __('Нишкова обработка') }}" class="w-full h-full object-cover">
                 </div>
                 <div class="absolute inset-0 z-[1] bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-slate-950/30 group-hover:from-slate-950/95 group-hover:via-slate-950/60 group-hover:to-slate-950/30 transition-colors"></div>
                 <div class="absolute inset-0 border-2 border-accent-500/20 group-hover:border-accent-500/50 transition-all duration-500 rounded-sm z-20 pointer-events-none"></div>
@@ -91,24 +91,6 @@
                     <h3 class="text-xl font-bold text-white mb-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{{ __('Нишкова обработка') }}</h3>
                     <p class="text-slate-200 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
                         {{ __('Специализирана нишкова обработка на метални компоненти.') }}
-                    </p>
-                </div>
-            </div>
-            <div class="card card-hover group relative overflow-hidden">
-                <div class="absolute inset-0 z-0 opacity-40 group-hover:opacity-60 transition-opacity">
-                    <img src="{{ asset('images-crafting/IMG_3660.jpg') }}" alt="{{ __('Обемна ерозийна обработка') }}" class="w-full h-full object-cover">
-                </div>
-                <div class="absolute inset-0 z-[1] bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-slate-950/30 group-hover:from-slate-950/95 group-hover:via-slate-950/60 group-hover:to-slate-950/30 transition-colors"></div>
-                <div class="absolute inset-0 border-2 border-accent-500/20 group-hover:border-accent-500/50 transition-all duration-500 rounded-sm z-20 pointer-events-none"></div>
-                <div class="relative z-10 flex flex-col">
-                    <div class="w-16 h-16 bg-slate-900/90 backdrop-blur-sm border border-accent-500/30 rounded-sm flex items-center justify-center mb-6 shadow-lg shadow-black/50">
-                        <svg class="w-8 h-8 text-accent-400 drop-shadow-lg" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{{ __('Обемна ерозийна обработка') }}</h3>
-                    <p class="text-slate-200 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
-                        {{ __('Обемна ерозийна обработка за серийно производство.') }}
                     </p>
                 </div>
             </div>
@@ -168,7 +150,7 @@
             <div class="relative">
                 <div class="relative rounded-sm overflow-hidden border border-slate-800/50 shadow-2xl group">
                     <div class="aspect-square overflow-hidden">
-                        <img src="{{ asset('metalworking-images/premium_photo-1664303560361-2b31c2d2c0ba.avif') }}" alt="{{ __('Започнете вашия проект с нас!') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <img src="{{ asset('metalworking-images/IMG_2115.jpg') }}" alt="{{ __('Започнете вашия проект с нас!') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>

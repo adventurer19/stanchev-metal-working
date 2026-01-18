@@ -61,8 +61,8 @@
             'longitude' => '24.6167'
         ],
         'url' => url('/'),
-        'telephone' => '+35977855070',
-        'email' => 'stanchev_sin2025@abv.bg',
+        'telephone' => config('app.company.phone'),
+        'email' => config('app.company.email'),
         'priceRange' => '$$',
         'openingHoursSpecification' => [[
             '@type' => 'OpeningHoursSpecification',
@@ -90,7 +90,7 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
                     <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'nav-link-active' : '' }}">{{ __('Начало') }}</a>
-                    <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') || request()->routeIs('portfolio') ? 'nav-link-active' : '' }}">{{ __('За нас') }}</a>
+                    <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'nav-link-active' : '' }}">{{ __('За нас') }}</a>
                     <a href="{{ route('why-us') }}" class="nav-link {{ request()->routeIs('why-us') ? 'nav-link-active' : '' }}">{{ __('Защо ние') }}</a>
                     <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'nav-link-active' : '' }}">{{ __('Контакти') }}</a>
                 </div>
@@ -188,9 +188,9 @@
                 <div>
                     <h4 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">{{ __('Контакти') }}</h4>
                     <ul class="space-y-2 text-slate-400 text-sm">
-                        <li>{{ __('Болтата, бул. „Столетов" 162') }}</li>
-                        <li><a href="tel:+35977855070" class="hover:text-accent-400 transition-colors">+359 77855070</a></li>
-                        <li><a href="mailto:stanchev_sin2025@abv.bg" class="hover:text-accent-400 transition-colors">stanchev_sin2025@abv.bg</a></li>
+                        <li>{{ config('app.company.address') }}</li>
+                        <li><a href="tel:{{ str_replace(' ', '', config('app.company.phone')) }}" class="hover:text-accent-400 transition-colors">{{ config('app.company.phone') }}</a></li>
+                        <li><a href="mailto:{{ config('app.company.email') }}" class="hover:text-accent-400 transition-colors">{{ config('app.company.email') }}</a></li>
                     </ul>
                 </div>
                 <div>
