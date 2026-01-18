@@ -1,47 +1,46 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
 
-echo "🚀 Deploy..."
+PROJECT_DIR="/opt/projects/stanchev-metal-working"
+COMPOSE_FILE="${PROJECT_DIR}/docker-compose.prod.yml"
 
-cd /opt/projects/stanchev-metal-working
+NGINX_CONTAINER="nginx-proxy"
+APP_CONTAINER="stanchev-app"
 
-# Stop containers
-docker compose -f docker-compose.prod.yml down
+echo "==> Deploy: $(date)"
+cd "$PROJECT_DIR"
 
-# Fix permissions
-sudo chown -R ubuntu:ubuntu .
+echo "==> Git pull"
+git fetch origin main
+git pull origin main
 
-# Clean everything
-sudo rm -rf vendor/ node_modules/ public/build/ bootstrap/cache/ storage/framework/
+echo "==> Stop app stack"
+docker compose -f "$COMPOSE_FILE" down
 
-# Pull latest
-git fetch origin
-git reset --hard origin/main
-git clean -fd
+echo "==> Clean old caches/deps on host (optional but as you wanted)"
+rm -rf node_modules || true
+rm -rf vendor || true
+rm -rf public/build || true
 
-# Recreate Laravel structure
-sudo mkdir -p storage/framework/{cache,sessions,views}
-sudo mkdir -p bootstrap/cache
-sudo touch storage/framework/cache/.gitkeep
-sudo touch storage/framework/sessions/.gitkeep  
-sudo touch storage/framework/views/.gitkeep
-sudo touch bootstrap/cache/.gitkeep
+echo "==> Build & start app stack"
+docker compose -f "$COMPOSE_FILE" up -d --build
 
-# Build and start (will rebuild if Dockerfile changed)
-echo "🔨 Building containers..."
-docker compose -f docker-compose.prod.yml build --no-cache
-docker compose -f docker-compose.prod.yml up -d
-sleep 15
+echo "==> Wait for app container to be up"
+# simple wait loop
+for i in {1..30}; do
+  if docker ps --format '{{.Names}}' | grep -q "^${APP_CONTAINER}$"; then
+    break
+  fi
+  sleep 1
+done
 
-# Now install inside container (as www-data user)
-echo "📦 Installing dependencies..."
-docker compose -f docker-compose.prod.yml exec -T stanchev-app composer install --no-dev --optimize-autoloader --no-interaction
-docker compose -f docker-compose.prod.yml exec -T stanchev-app npm ci --omit=dev
-docker compose -f docker-compose.prod.yml exec -T stanchev-app npm run build
-docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan optimize
+echo "==> Sync Vite build assets from app container to host public/"
+rm -rf "${PROJECT_DIR}/public/build" || true
+docker cp "${APP_CONTAINER}:/var/www/html/public/build" "${PROJECT_DIR}/public/"
 
-# Restart
-docker compose -f docker-compose.prod.yml restart
+echo "==> Test & reload nginx"
+docker exec -it "$NGINX_CONTAINER" nginx -t
+docker exec -it "$NGINX_CONTAINER" nginx -s reload
 
-echo ""
-echo "✅ Done! https://stanchevisin.com"
+echo "==> Done."
+echo "Check: curl -I https://stanchevisin.com/build/assets/*.css"
