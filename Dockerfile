@@ -7,8 +7,8 @@ RUN composer install \
   --no-interaction \
   --no-progress \
   --prefer-dist \
-  --optimize-autoloader
-
+  --optimize-autoloader \
+  --no-scripts
 
 # ---------- Frontend build (Vite) ----------
 FROM node:20-alpine AS frontend
