@@ -27,7 +27,6 @@ docker compose -f docker-compose.prod.yml up -d
 sleep 10
 
 # Install & Build
-docker compose -f docker-compose.prod.yml exec -T stanchev-app git config --global --add safe.directory /var/www/html
 docker compose -f docker-compose.prod.yml exec -T stanchev-app composer install --no-dev --optimize-autoloader
 docker compose -f docker-compose.prod.yml exec -T stanchev-app npm ci --omit=dev
 docker compose -f docker-compose.prod.yml exec -T stanchev-app npm run build
