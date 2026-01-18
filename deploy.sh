@@ -8,6 +8,9 @@ cd /opt/projects/stanchev-metal-working
 # Stop containers
 docker compose -f docker-compose.prod.yml down
 
+# Fix permissions FIRST (before git operations)
+sudo chown -R ubuntu:ubuntu .
+
 # Clean
 sudo rm -rf vendor/ node_modules/ public/build/ bootstrap/cache/* storage/framework/cache/* storage/framework/sessions/* storage/framework/views/*
 
@@ -16,8 +19,7 @@ git fetch origin
 git reset --hard origin/main
 git clean -fd
 
-# Fix permissions
-sudo chown -R ubuntu:ubuntu .
+# Create directories & fix permissions for Docker
 sudo mkdir -p vendor/ node_modules/ public/build/ storage/framework/{cache,sessions,views} bootstrap/cache/
 sudo chown -R www-data:www-data storage/ bootstrap/cache/ vendor/ node_modules/ public/build/
 sudo chmod -R 775 storage/ bootstrap/cache/
