@@ -26,7 +26,7 @@ npm run dev
 
 ## Production Deployment
 
-### Normal Deploy
+### Единствена команда:
 
 ```bash
 # Локално: Commit и push
@@ -40,31 +40,28 @@ cd /opt/projects/stanchev-metal-working
 bash deploy.sh
 ```
 
-### 🚨 Emergency Fixes
+**Това е всичко!** Скриптът прави всичко автоматично:
+- Pull latest changes
+- Clean old builds
+- Fix permissions
+- Install dependencies
+- Build assets
+- Optimize Laravel
+- Restart containers
 
-**Corrupted vendor/ error:**
-```bash
-bash emergency-fix-vendor.sh
-bash deploy.sh
-```
+### Troubleshooting
 
-**Permission denied:**
+Ако има permission denied:
 ```bash
 sudo chown -R ubuntu:ubuntu /opt/projects/stanchev-metal-working
 bash deploy.sh
 ```
 
-**Deploy with rebuild:**
-```bash
-bash deploy.sh --rebuild
-```
-
 ### 📚 Documentation
 
-- **[DEPLOY_GUIDE.md](DEPLOY_GUIDE.md)** - Complete deployment guide
-- **[DEPLOYMENT_PERMISSIONS.md](DEPLOYMENT_PERMISSIONS.md)** - Permission issues & fixes
-- **[QUICK_FIX_PERMISSIONS.md](QUICK_FIX_PERMISSIONS.md)** - Quick reference
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Complete deployment guide
 - **[EMAIL_SETUP_COMPLETE.md](EMAIL_SETUP_COMPLETE.md)** - Email system docs
+- **[TEST_EMAIL.md](TEST_EMAIL.md)** - Email testing
 
 **Production URL**: https://stanchevisin.com
 

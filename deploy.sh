@@ -1,83 +1,40 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Stanchev Metalworking - Deploy"
-echo "=================================="
+echo "🚀 Deploy..."
 
-PROJECT_DIR="/opt/projects/stanchev-metal-working"
+cd /opt/projects/stanchev-metal-working
 
-# Check if --rebuild flag is passed
-REBUILD=false
-if [[ "$1" == "--rebuild" ]]; then
-    REBUILD=true
-    echo "⚠️  REBUILD MODE - Will rebuild Docker containers"
-fi
+# Stop containers
+docker compose -f docker-compose.prod.yml down
 
-cd $PROJECT_DIR
+# Clean
+sudo rm -rf vendor/ node_modules/ public/build/ bootstrap/cache/* storage/framework/cache/* storage/framework/sessions/* storage/framework/views/*
 
-echo ""
-echo "🔧 Fix permissions before git operations..."
-sudo chown -R ubuntu:ubuntu .git .gitignore 2>/dev/null || true
-sudo chown ubuntu:ubuntu . 2>/dev/null || true
+# Pull latest
+git fetch origin
+git reset --hard origin/main
+git clean -fd
 
-echo ""
-echo "📥 Git pull..."
-BEFORE_PULL=$(git rev-parse HEAD)
-git pull origin main
-AFTER_PULL=$(git rev-parse HEAD)
+# Fix permissions
+sudo chown -R ubuntu:ubuntu .
+sudo mkdir -p vendor/ node_modules/ public/build/ storage/framework/{cache,sessions,views} bootstrap/cache/
+sudo chown -R www-data:www-data storage/ bootstrap/cache/ vendor/ node_modules/ public/build/
+sudo chmod -R 775 storage/ bootstrap/cache/
 
-# Check if Dockerfile or docker-compose changed in the pull
-CHANGED_FILES=$(git diff --name-only $BEFORE_PULL $AFTER_PULL 2>/dev/null || echo "")
+# Start
+docker compose -f docker-compose.prod.yml up -d
+sleep 10
 
-# Rebuild containers if flag is set or if Dockerfile/docker-compose changed
-if [ "$REBUILD" = true ] || echo "$CHANGED_FILES" | grep -q -E "Dockerfile|docker-compose"; then
-    echo ""
-    echo "🔨 Rebuilding Docker containers..."
-    docker compose -f docker-compose.prod.yml down
-    docker compose -f docker-compose.prod.yml build --no-cache
-    docker compose -f docker-compose.prod.yml up -d
-    echo "⏳ Waiting for containers to start..."
-    sleep 10
-fi
-
-echo ""
-echo "🔧 Fix permissions..."
-# First, make ubuntu owner of source files
-sudo chown -R ubuntu:ubuntu . 2>/dev/null || true
-# Then, make www-data owner of writable directories
-sudo chown -R www-data:www-data storage bootstrap/cache 2>/dev/null || true
-sudo chmod -R 775 storage bootstrap/cache 2>/dev/null || true
-# If node_modules, public/build, vendor exist, fix them too
-[ -d "node_modules" ] && sudo chown -R www-data:www-data node_modules 2>/dev/null || true
-[ -d "public/build" ] && sudo chown -R www-data:www-data public/build 2>/dev/null || true
-[ -d "vendor" ] && sudo chown -R www-data:www-data vendor 2>/dev/null || true
-
-echo ""
-echo "📦 Install Composer dependencies..."
+# Install & Build
+docker compose -f docker-compose.prod.yml exec -T stanchev-app git config --global --add safe.directory /var/www/html
 docker compose -f docker-compose.prod.yml exec -T stanchev-app composer install --no-dev --optimize-autoloader
-
-echo ""
-echo "📦 Install NPM dependencies..."
 docker compose -f docker-compose.prod.yml exec -T stanchev-app npm ci --omit=dev
-
-echo ""
-echo "🔨 Build assets..."
 docker compose -f docker-compose.prod.yml exec -T stanchev-app npm run build
-
-echo ""
-echo "💾 Optimize Laravel..."
 docker compose -f docker-compose.prod.yml exec -T stanchev-app php artisan optimize
 
-echo ""
-echo "🔧 Fix permissions again..."
-sudo chown -R www-data:www-data storage bootstrap/cache 2>/dev/null || true
-sudo chmod -R 775 storage bootstrap/cache 2>/dev/null || true
-[ -d "public/build" ] && sudo chown -R www-data:www-data public/build 2>/dev/null || true
+# Fix permissions & Restart
+sudo chown -R www-data:www-data vendor/ node_modules/ public/build/ storage/ bootstrap/cache/
+docker compose -f docker-compose.prod.yml restart
 
-echo ""
-echo "🔄 Restart app..."
-docker compose -f docker-compose.prod.yml restart stanchev-app
-
-echo ""
-echo "✅ Deploy complete!"
-echo "🌐 https://stanchevisin.com"
+echo "✅ Done! https://stanchevisin.com"
