@@ -1,33 +1,51 @@
-FROM php:8.4-fpm
+# ---------- PHP deps (vendor) ----------
+FROM composer:2 AS vendor
+WORKDIR /app
+COPY composer.json composer.lock ./
+RUN composer install \
+  --no-dev \
+  --no-interaction \
+  --no-progress \
+  --prefer-dist \
+  --optimize-autoloader
 
-# Set working directory
+
+# ---------- Frontend build (Vite) ----------
+FROM node:20-alpine AS frontend
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+COPY . .
+RUN npm run build
+
+
+# ---------- Runtime (PHP-FPM only) ----------
+FROM php:8.4-fpm AS runtime
 WORKDIR /var/www/html
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git \
-    curl \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
-    zip \
     unzip \
-    nodejs \
-    npm \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+  && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip \
+  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY . .
 
-# Create www-data home directory for composer cache
-RUN mkdir -p /var/www/.cache /var/www/.config && \
-    chown -R www-data:www-data /var/www
+COPY --from=vendor /app/vendor /var/www/html/vendor
+COPY --from=frontend /app/public/build /var/www/html/public/build
 
-# Change current user to www-data
-USER www-data
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Expose port 9000 and start php-fpm server
+RUN mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache \
+  && chown -R www-data:www-data storage bootstrap/cache
+
 EXPOSE 9000
+USER www-data
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["php-fpm"]
