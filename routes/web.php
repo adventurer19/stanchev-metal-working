@@ -128,6 +128,11 @@ Route::get('/robots.txt', function (\Illuminate\Http\Request $request) {
     return response($content, 200)->header('Content-Type', 'text/plain');
 })->name('robots');
 
+// Favicon redirect to avoid 404
+Route::get('/favicon.ico', function () {
+    return redirect('/favicon-optimized.svg', 301);
+})->name('favicon');
+
 // Contact form submission with rate limiting (max 5 attempts per minute)
 Route::post('/contact', function (\Illuminate\Http\Request $request) {
     $locale = app()->getLocale();
