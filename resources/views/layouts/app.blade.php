@@ -15,17 +15,19 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('og_title', __('Станчев и Син 2025 ЕООД - Прецизна металообработка'))">
-    <meta property="og:description" content="@yield('og_description', __('Прецизна металообработка и индустриални решения в България'))">
+    <meta property="og:title" content="@yield('title', __('Станчев и Син 2025 ЕООД - Прецизна металообработка'))">
+    <meta property="og:description" content="@yield('description', __('Прецизна металообработка и индустриални решения в България. Професионални услуги по металообработка, заваряване и производство на метални конструкции.'))">
     <meta property="og:image" content="{{ asset('metalworking-images/precision-metal-working.png') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:locale" content="{{ app()->getLocale() === 'bg' ? 'bg_BG' : 'en_US' }}">
     <meta property="og:site_name" content="Станчев и Син 2025 ЕООД">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ url()->current() }}">
-    <meta name="twitter:title" content="@yield('twitter_title', __('Станчев и Син 2025 ЕООД - Прецизна металообработка'))">
-    <meta name="twitter:description" content="@yield('twitter_description', __('Прецизна металообработка и индустриални решения в България'))">
+    <meta name="twitter:title" content="@yield('title', __('Станчев и Син 2025 ЕООД - Прецизна металообработка'))">
+    <meta name="twitter:description" content="@yield('description', __('Прецизна металообработка и индустриални решения в България. Професионални услуги по металообработка, заваряване и производство на метални конструкции.'))">
     <meta name="twitter:image" content="{{ asset('metalworking-images/precision-metal-working.png') }}">
     
     <!-- Favicon -->

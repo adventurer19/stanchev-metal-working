@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title', __('Контакти - Станчев и Син 2025 ЕООД'))
+@section('title', __('Контакти Плевен | Свържете се с нас | Станчев и Син'))
+@section('description', __('Свържете се с нас за оферта. Телефон: +359 77855070, Email: stanchev_sin2025@abv.bg. Адрес: Плевен, бул. Столетов 162. Работно време: Пон-Пет 8-17ч.'))
+@section('keywords', __('контакти металообработка, телефон Плевен, оферта заваряване, адрес Станчев и Син'))
 
 @section('content')
 <!-- Hero Section -->
@@ -50,6 +52,12 @@
                 @endif
                 <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6">
                     @csrf
+                    
+                    {{-- Honeypot field - hidden from users but visible to bots --}}
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                        <input type="text" name="website" tabindex="-1" autocomplete="off" />
+                    </div>
+                    
                     <div>
                         <label for="name" class="block text-sm font-semibold text-slate-300 mb-2">{{ __('Име') }}</label>
                         <input type="text" id="name" name="name" value="{{ old('name') }}" required 
