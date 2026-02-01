@@ -23,6 +23,12 @@
         </div>
     </section>
 
+    <!-- Gradient Separator -->
+    <div class="relative h-32 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-accent-500/20 to-transparent"></div>
+        <div class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"></div>
+    </div>
+
     <!-- What We Offer Section -->
     <section class="py-24 md:py-32 bg-slate-900 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
@@ -107,6 +113,12 @@
         </div>
     </section>
 
+    <!-- Gradient Separator -->
+    <div class="relative h-32 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-accent-500/20 to-transparent"></div>
+        <div class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"></div>
+    </div>
+
 
 
 
@@ -140,6 +152,12 @@
             </div>
         </div>
     </section>
+
+    <!-- Gradient Separator -->
+    <div class="relative h-32 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-accent-500/20 to-transparent"></div>
+        <div class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"></div>
+    </div>
 
     <!-- Features Section -->
     <section class="py-16 sm:py-24 md:py-32 bg-slate-900 relative overflow-hidden">
@@ -223,79 +241,156 @@
         </div>
     </section>
 
+    <!-- Gradient Separator -->
+    <div class="relative h-32 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-accent-500/20 to-transparent"></div>
+        <div class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"></div>
+    </div>
 
-    <!-- Products Grid Section -->
+
+    <!-- Products Collection Section -->
     <section id="products" class="py-24 md:py-32 bg-slate-950 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.08),transparent_70%)]"></div>
+        
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
             <div class="text-center mb-12 md:mb-20">
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-accent-500/10 backdrop-blur-sm border border-accent-500/30 rounded-sm">
+                    <svg class="w-5 h-5 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                    </svg>
+                    <span class="text-sm font-semibold text-accent-300 tracking-wide">{{ __('Продуктова колекция') }}</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
                     {{ __('Нашите продукти') }}
                 </h2>
-                <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">
-                    {{ __('Прегледайте нашите продукти и проекти в областта на прецизната металообработка') }}
+                <div class="w-20 h-1 bg-gradient-to-r from-accent-500 to-accent-600 mx-auto mb-6"></div>
+                <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                    {{ __('Прегледайте нашата колекция от прецизни метални детайли и компоненти, изработени с най-високо качество и внимание към детайла') }}
                 </p>
             </div>
 
             @if(isset($products) && count($products) > 0)
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Product Cards Grid -->
+                <div class="relative max-w-7xl mx-auto">
+                    <!-- Gradient Lines Between Cards (Hidden on mobile and tablet) -->
+                    @if(count($products) > 1)
+                        <div class="hidden lg:block absolute top-0 bottom-0 left-1/3 -translate-x-1/2 w-px">
+                            <div class="h-full w-full bg-gradient-to-b from-transparent via-accent-500/40 to-transparent"></div>
+                        </div>
+                    @endif
+                    @if(count($products) > 2)
+                        <div class="hidden lg:block absolute top-0 bottom-0 left-2/3 -translate-x-1/2 w-px">
+                            <div class="h-full w-full bg-gradient-to-b from-transparent via-accent-500/40 to-transparent"></div>
+                        </div>
+                    @endif
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
                     @foreach($products as $index => $product)
-                        <div onclick="openProductGallery({{ $index }})" class="product-card group relative cursor-pointer">
-                            <!-- Card Container -->
-                            <div class="relative overflow-hidden rounded-sm bg-slate-900/80 backdrop-blur-sm border-2 border-slate-800/50 group-hover:border-accent-500/50 transition-all duration-500 shadow-lg group-hover:shadow-2xl group-hover:shadow-accent-500/20">
-                                <!-- Image Container -->
-                                <div class="aspect-[4/3] overflow-hidden relative">
-                                    <img src="{{ asset($product['thumbnail']) }}"
-                                         alt="{{ $product['name'] }}"
-                                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-
-                                    <!-- Gradient Overlay -->
-                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                                    <!-- Image Counter Badge -->
-                                    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
-                                        <div class="px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/20 rounded-sm">
-                                        <span class="text-white text-xs font-semibold flex items-center gap-1.5">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <!-- Product Library Card -->
+                        <div onclick="openProductGallery({{ $index }}, 0)" 
+                             class="card-library group cursor-pointer relative overflow-hidden bg-gradient-to-br from-slate-800/60 via-slate-900/60 to-slate-900/80 border-2 border-slate-700/50 hover:border-accent-500/70 transition-all duration-700 shadow-2xl hover:shadow-accent-500/30 hover:scale-[1.02] rounded-lg">
+                            
+                            <!-- Main Product Image -->
+                            <div class="aspect-[4/3] overflow-hidden relative rounded-t-lg">
+                                <img src="{{ asset($product['thumbnail']) }}"
+                                     alt="{{ $product['name'] }}"
+                                     class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110">
+                                
+                                <!-- Gradient Overlay -->
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
+                                
+                                <!-- Image Counter Badge -->
+                                <div class="absolute top-4 right-4 transform group-hover:scale-110 transition-transform duration-500">
+                                    <div class="px-4 py-2 bg-accent-500/90 backdrop-blur-md border-2 border-accent-400/50 rounded-sm shadow-xl">
+                                        <div class="flex items-center gap-2">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                             </svg>
-                                            {{ count($product['images']) }} {{ __('снимки') }}
-                                        </span>
-                                        </div>
-                                    </div>
-
-                                    <!-- View Icon -->
-                                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-                                        <div class="w-16 h-16 rounded-sm bg-white/10 backdrop-blur-md border-2 border-white/20 flex items-center justify-center transform scale-90 group-hover:scale-100 transition-transform duration-500">
-                                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                            </svg>
+                                            <span class="text-white text-sm font-bold">{{ count($product['images']) }} {{ count($product['images']) == 1 ? __('снимка') : __('снимки') }}</span>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Product Info -->
-                                <div class="p-6 flex items-center justify-center">
-                                    <div class="flex items-center gap-2 text-accent-400 text-sm font-medium">
-                                        <span>{{ __('Разгледай') }}</span>
-                                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                
+                                <!-- Category Badge (Bottom Left) -->
+                                <div class="absolute bottom-4 left-4 transform group-hover:translate-x-1 transition-transform duration-500">
+                                    <div class="px-4 py-2 bg-slate-900/90 backdrop-blur-md border border-slate-700/50 rounded-sm">
+                                        <span class="text-accent-300 text-xs font-semibold uppercase tracking-wider">{{ __(ucfirst(str_replace('-', ' ', $product['name']))) }}</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- View Overlay Icon -->
+                                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
+                                    <div class="w-20 h-20 rounded-full bg-accent-500/95 backdrop-blur-md border-4 border-accent-400/50 flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform duration-500 shadow-2xl shadow-accent-500/50">
+                                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                         </svg>
                                     </div>
                                 </div>
-
+                                
                                 <!-- Shine Effect -->
-                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
                             </div>
+                            
+                            <!-- Card Content -->
+                            <div class="p-6 md:p-8 space-y-4">
+                                <!-- Title -->
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-accent-500/20 to-accent-600/20 rounded-sm flex items-center justify-center border border-accent-500/30 flex-shrink-0 group-hover:from-accent-500/30 group-hover:to-accent-600/30 transition-all duration-500">
+                                        <svg class="w-6 h-6 text-accent-400 group-hover:text-accent-300 transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                    </div>
+                                        <div class="flex-1">
+                                            <h3 class="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-accent-300 transition-colors duration-500">
+                                                {{ __(ucfirst(str_replace('-', ' ', $product['name']))) }}
+                                            </h3>
+                                            <p class="text-slate-400 text-sm md:text-base group-hover:text-slate-300 transition-colors duration-500">
+                                                {{ __('Прецизна изработка с високо качество') }}
+                                            </p>
+                                        </div>
+                                </div>
+                                
+                                <!-- Action Button -->
+                                <div class="pt-2">
+                                    <div class="inline-flex items-center gap-2 text-accent-400 group-hover:text-accent-300 text-sm md:text-base font-semibold transition-all duration-500">
+                                        <span>{{ __('Разгледай галерията') }}</span>
+                                        <svg class="w-5 h-5 transition-transform group-hover:translate-x-2 duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card Glow Effect -->
+                            <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-accent-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none"></div>
+                            <div class="absolute -top-10 -left-10 w-32 h-32 bg-accent-500/5 rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none"></div>
                         </div>
                     @endforeach
                 </div>
+            </div>
             @else
                 <div class="text-center py-16">
-                    <p class="text-slate-400 text-lg">{{ __('Няма налични продукти в момента.') }}</p>
+                    <div class="max-w-md mx-auto">
+                        <div class="w-20 h-20 bg-slate-800/50 rounded-sm flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-10 h-10 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                            </svg>
+                        </div>
+                        <p class="text-slate-400 text-lg">{{ __('Няма налични продукти в момента.') }}</p>
+                    </div>
                 </div>
             @endif
+        </div>
+        
+        <!-- Natural Fade Out -->
+        <div class="relative mt-20 md:mt-32 h-32 overflow-hidden pointer-events-none">
+            <!-- Smooth natural fade -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950"></div>
+            <!-- Very subtle accent hint -->
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.03),transparent_70%)]"></div>
         </div>
     </section>
 
@@ -340,9 +435,9 @@
         let currentProductIndex = 0;
         let currentImageIndex = 0;
 
-        function openProductGallery(productIndex) {
+        function openProductGallery(productIndex, imageIndex = 0) {
             currentProductIndex = productIndex;
-            currentImageIndex = 0;
+            currentImageIndex = imageIndex;
             updateGalleryImage();
             document.getElementById('product-gallery-modal').classList.remove('hidden');
             document.getElementById('product-gallery-modal').classList.add('flex');
@@ -377,7 +472,7 @@
 
             setTimeout(() => {
                 imgElement.src = baseUrl + imagePath;
-                imgElement.alt = product.name + ' - {{ __('Снимка') }} ' + (currentImageIndex + 1);
+                imgElement.alt = '{{ __('Продукт') }} ' + (currentImageIndex + 1);
                 document.getElementById('gallery-image-counter').textContent = (currentImageIndex + 1) + ' / ' + product.images.length;
 
                 // Fade in
