@@ -23,12 +23,6 @@
         </div>
     </section>
 
-    <!-- Gradient Separator -->
-    <div class="relative h-32 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-accent-500/20 to-transparent"></div>
-        <div class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"></div>
-    </div>
-
     <!-- What We Offer Section -->
     <section class="py-24 md:py-32 bg-slate-900 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
@@ -115,7 +109,6 @@
 
     <!-- Gradient Separator -->
     <div class="relative h-32 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-accent-500/20 to-transparent"></div>
         <div class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"></div>
     </div>
 
@@ -155,7 +148,6 @@
 
     <!-- Gradient Separator -->
     <div class="relative h-32 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-accent-500/20 to-transparent"></div>
         <div class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"></div>
     </div>
 
@@ -243,7 +235,6 @@
 
     <!-- Gradient Separator -->
     <div class="relative h-32 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-accent-500/20 to-transparent"></div>
         <div class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"></div>
     </div>
 
