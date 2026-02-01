@@ -7,7 +7,7 @@
     <!-- SEO Meta Tags -->
     <title>@yield('title', __('Станчев и Син 2025 ЕООД - Прецизна металообработка'))</title>
     <meta name="description" content="@yield('description', __('Прецизна металообработка и индустриални решения в България. Професионални услуги по металообработка, заваряване и производство на метални конструкции.'))">
-    <meta name="keywords" content="@yield('keywords', __('металообработка, заваряване, метални конструкции, индустриални решения, България, Плевен'))">
+    <meta name="keywords" content="@yield('keywords', __('металообработка, заваряване, метални конструкции, индустриални решения, България, Габрово'))">
     <meta name="author" content="Станчев и Син 2025 ЕООД">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="{{ url()->current() }}">
@@ -52,9 +52,9 @@
         'address' => [
             '@type' => 'PostalAddress',
             'streetAddress' => 'бул. Столетов 162',
-            'addressLocality' => 'Плевен',
-            'addressRegion' => 'Плевен',
-            'postalCode' => '5800',
+            'addressLocality' => 'Габрово',
+            'addressRegion' => 'Габрово',
+            'postalCode' => '5300',
             'addressCountry' => 'BG'
         ],
         'geo' => [
