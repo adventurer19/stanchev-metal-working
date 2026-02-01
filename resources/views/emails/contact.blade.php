@@ -159,12 +159,18 @@
                         <a href="mailto:{{ $email }}" style="color: #38bdf8; text-decoration: none;">{{ $email }}</a>
                     </div>
                 </div>
-                @if($phone)
+                @if($phone && $phone !== 'Не е посочен' && $phone !== 'Not provided')
                 <div class="info-row">
                     <div class="info-label">📞 Телефон</div>
                     <div class="info-value">
                         <a href="tel:{{ $phone }}" style="color: #38bdf8; text-decoration: none;">{{ $phone }}</a>
                     </div>
+                </div>
+                @endif
+                @if($ip ?? false)
+                <div class="info-row">
+                    <div class="info-label">🌐 IP Адрес</div>
+                    <div class="info-value" style="font-family: monospace; font-size: 14px;">{{ $ip }}</div>
                 </div>
                 @endif
             </div>

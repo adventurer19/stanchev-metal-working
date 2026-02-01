@@ -13,6 +13,8 @@ services:
       - metalworking-network
     depends_on:
       - mysql
+    env_file:
+      - .env
     environment:
       - PHP_FPM_LISTEN=0.0.0.0:9000
 

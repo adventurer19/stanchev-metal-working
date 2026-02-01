@@ -27,7 +27,7 @@ class TestMailCommand extends Command
      */
     public function handle()
     {
-        $testEmail = $this->argument('email') ?? 'nezull02@abv.bg';
+        $testEmail = $this->argument('email') ?? 'stanchev_sin2025@abv.bg';
 
         $this->info('🔍 Mail Configuration:');
         $this->line('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
@@ -57,6 +57,7 @@ class TestMailCommand extends Command
                 'timestamp' => now()->format('d.m.Y H:i:s'),
             ];
 
+            // Не задаваме from() експлицитно - оставяме Laravel да използва MAIL_FROM_ADDRESS
             Mail::send('emails.contact', $data, function ($message) use ($testEmail) {
                 $message->to($testEmail)
                     ->subject('🧪 Тестово съобщение - Контактна форма')
