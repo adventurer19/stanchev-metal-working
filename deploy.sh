@@ -47,11 +47,15 @@ fi
 echo "==> Run database migrations"
 docker exec "$APP_CONTAINER" php artisan migrate --force
 
+echo "==> Fix storage permissions"
+docker exec "$APP_CONTAINER" chown -R www-data:www-data /var/www/html/storage
+docker exec "$APP_CONTAINER" chmod -R 775 /var/www/html/storage
+
 echo "==> Clear Laravel caches"
 docker exec "$APP_CONTAINER" php artisan config:clear
 docker exec "$APP_CONTAINER" php artisan route:clear
 docker exec "$APP_CONTAINER" php artisan view:clear
-docker exec "$APP_CONTAINER" php artisan cache:clear
+docker exec "$APP_CONTAINER" php artisan cache:clear || echo "    ⚠ Cache clear failed (not critical)"
 
 echo "==> Sync Vite build assets from app container to host public/"
 rm -rf "${PROJECT_DIR}/public/build" || true
