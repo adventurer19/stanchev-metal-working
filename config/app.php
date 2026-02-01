@@ -115,6 +115,15 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Panel Credentials
+    |--------------------------------------------------------------------------
+    */
+
+    'admin_user' => env('ADMIN_USER', 'stanchev'),
+    'admin_pass' => env('ADMIN_PASS', 'stanchevsin2025'),
+
 ];
 
 

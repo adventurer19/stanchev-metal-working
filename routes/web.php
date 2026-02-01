@@ -30,8 +30,11 @@ Route::post('/admin/login', function (\Illuminate\Http\Request $request) {
     $username = $request->input('username');
     $password = $request->input('password');
 
-    // Check credentials from .env
-    if ($username === env('ADMIN_USER') && $password === env('ADMIN_PASS')) {
+    // Check credentials from config (not env() - doesn't work with config cache)
+    $adminUser = config('app.admin_user', env('ADMIN_USER'));
+    $adminPass = config('app.admin_pass', env('ADMIN_PASS'));
+    
+    if ($username === $adminUser && $password === $adminPass) {
         Session::put('admin_authenticated', true);
         Session::put('admin_username', $username);
         return redirect()->route('admin.dashboard')->with('success', 'Успешно влязохте в системата!');
