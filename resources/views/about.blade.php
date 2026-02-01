@@ -107,12 +107,6 @@
         </div>
     </section>
 
-    <!-- Gradient Separator -->
-    <div class="relative h-32 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 overflow-hidden">
-        <div class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"></div>
-    </div>
-
-
 
 
     <section class="py-16 sm:py-24 md:py-32 bg-slate-900 relative overflow-hidden">
@@ -146,10 +140,6 @@
         </div>
     </section>
 
-    <!-- Gradient Separator -->
-    <div class="relative h-32 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900 overflow-hidden">
-        <div class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"></div>
-    </div>
 
     <!-- Features Section -->
     <section class="py-16 sm:py-24 md:py-32 bg-slate-900 relative overflow-hidden">
@@ -233,11 +223,6 @@
         </div>
     </section>
 
-    <!-- Gradient Separator -->
-    <div class="relative h-32 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 overflow-hidden">
-        <div class="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"></div>
-    </div>
-
 
     <!-- Products Collection Section -->
     <section id="products" class="py-24 md:py-32 bg-slate-950 relative overflow-hidden">
@@ -280,11 +265,11 @@
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
                     @foreach($products as $index => $product)
                         <!-- Product Library Card -->
-                        <div onclick="openProductGallery({{ $index }}, 0)" 
-                             class="card-library group cursor-pointer relative overflow-hidden bg-gradient-to-br from-slate-800/60 via-slate-900/60 to-slate-900/80 border-2 border-slate-700/50 hover:border-accent-500/70 transition-all duration-700 shadow-2xl hover:shadow-accent-500/30 hover:scale-[1.02] rounded-lg">
+                        <div onclick="openProductGallery({{ $index }}, 0)"
+                             class="card-library group cursor-pointer relative overflow-hidden bg-gradient-to-br from-slate-800/60 via-slate-900/60 to-slate-900/80 border-2 border-slate-700/50 hover:border-accent-500/70 transition-all duration-700 shadow-2xl hover:shadow-accent-500/30 hover:scale-[1.02] rounded-sm">
                             
                             <!-- Main Product Image -->
-                            <div class="aspect-[4/3] overflow-hidden relative rounded-t-lg">
+                            <div class="aspect-[4/3] overflow-hidden relative">
                                 <img src="{{ asset($product['thumbnail']) }}"
                                      alt="{{ $product['name'] }}"
                                      class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110">
@@ -292,32 +277,10 @@
                                 <!-- Gradient Overlay -->
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
                                 
-                                <!-- Image Counter Badge -->
-                                <div class="absolute top-4 right-4 transform group-hover:scale-110 transition-transform duration-500">
-                                    <div class="px-4 py-2 bg-accent-500/90 backdrop-blur-md border-2 border-accent-400/50 rounded-sm shadow-xl">
-                                        <div class="flex items-center gap-2">
-                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                            </svg>
-                                            <span class="text-white text-sm font-bold">{{ count($product['images']) }} {{ count($product['images']) == 1 ? __('снимка') : __('снимки') }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
                                 <!-- Category Badge (Bottom Left) -->
                                 <div class="absolute bottom-4 left-4 transform group-hover:translate-x-1 transition-transform duration-500">
-                                    <div class="px-4 py-2 bg-slate-900/90 backdrop-blur-md border border-slate-700/50 rounded-sm">
-                                        <span class="text-accent-300 text-xs font-semibold uppercase tracking-wider">{{ __(ucfirst(str_replace('-', ' ', $product['name']))) }}</span>
-                                    </div>
-                                </div>
-                                
-                                <!-- View Overlay Icon -->
-                                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-                                    <div class="w-20 h-20 rounded-full bg-accent-500/95 backdrop-blur-md border-4 border-accent-400/50 flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform duration-500 shadow-2xl shadow-accent-500/50">
-                                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                        </svg>
+                                    <div class="px-4 py-2.5 bg-gradient-to-r from-slate-800/95 via-slate-700/95 to-slate-800/95 backdrop-blur-md border border-accent-500/30 rounded-sm shadow-lg">
+                                        <span class="text-white text-sm font-bold uppercase tracking-wider drop-shadow-lg">{{ __(ucfirst(str_replace('-', ' ', $product['name']))) }}</span>
                                     </div>
                                 </div>
                                 
@@ -326,26 +289,26 @@
                             </div>
                             
                             <!-- Card Content -->
-                            <div class="p-6 md:p-8 space-y-4">
-                                <!-- Title -->
-                                <div class="flex items-start gap-4">
+                            <div class="p-6 md:p-8 flex flex-col">
+                                <!-- Title - Fixed Height Area -->
+                                <div class="flex items-start gap-4 min-h-[100px] mb-4">
                                     <div class="w-12 h-12 bg-gradient-to-br from-accent-500/20 to-accent-600/20 rounded-sm flex items-center justify-center border border-accent-500/30 flex-shrink-0 group-hover:from-accent-500/30 group-hover:to-accent-600/30 transition-all duration-500">
                                         <svg class="w-6 h-6 text-accent-400 group-hover:text-accent-300 transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                         </svg>
                                     </div>
-                                        <div class="flex-1">
-                                            <h3 class="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-accent-300 transition-colors duration-500">
-                                                {{ __(ucfirst(str_replace('-', ' ', $product['name']))) }}
-                                            </h3>
-                                            <p class="text-slate-400 text-sm md:text-base group-hover:text-slate-300 transition-colors duration-500">
-                                                {{ __('Прецизна изработка с високо качество') }}
-                                            </p>
-                                        </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-accent-300 transition-colors duration-500">
+                                            {{ __(ucfirst(str_replace('-', ' ', $product['name']))) }}
+                                        </h3>
+                                        <p class="text-slate-400 text-sm md:text-base group-hover:text-slate-300 transition-colors duration-500">
+                                            {{ __('Прецизна изработка с високо качество') }}
+                                        </p>
+                                    </div>
                                 </div>
                                 
-                                <!-- Action Button -->
-                                <div class="pt-2">
+                                <!-- Action Button - Always at Bottom -->
+                                <div class="mt-auto">
                                     <div class="inline-flex items-center gap-2 text-accent-400 group-hover:text-accent-300 text-sm md:text-base font-semibold transition-all duration-500">
                                         <span>{{ __('Разгледай галерията') }}</span>
                                         <svg class="w-5 h-5 transition-transform group-hover:translate-x-2 duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -377,11 +340,9 @@
         </div>
         
         <!-- Natural Fade Out -->
-        <div class="relative mt-20 md:mt-32 h-32 overflow-hidden pointer-events-none">
-            <!-- Smooth natural fade -->
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950"></div>
-            <!-- Very subtle accent hint -->
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.03),transparent_70%)]"></div>
+        <div class="relative mt-20 md:mt-32 h-40 overflow-hidden pointer-events-none">
+            <!-- Very smooth natural fade with multiple stops -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/20 to-slate-950/80"></div>
         </div>
     </section>
 
