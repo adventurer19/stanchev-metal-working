@@ -3,9 +3,93 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use App\ContactSubmission;
+
+// ========================================
+// ADMIN ROUTES
+// ========================================
+
+// Admin login page
+Route::get('/admin', function () {
+    // If already authenticated, redirect to dashboard
+    if (Session::get('admin_authenticated')) {
+        return redirect()->route('admin.dashboard');
+    }
+    return view('admin.login');
+})->name('admin.login');
+
+// Admin login submit
+Route::post('/admin/login', function (\Illuminate\Http\Request $request) {
+    $request->validate([
+        'username' => 'required|string',
+        'password' => 'required|string',
+    ]);
+
+    $username = $request->input('username');
+    $password = $request->input('password');
+
+    // Check credentials from .env
+    if ($username === env('ADMIN_USER') && $password === env('ADMIN_PASS')) {
+        Session::put('admin_authenticated', true);
+        Session::put('admin_username', $username);
+        return redirect()->route('admin.dashboard')->with('success', 'Успешно влязохте в системата!');
+    }
+
+    return back()->withErrors(['username' => 'Невалидно потребителско име или парола.'])->withInput();
+})->name('admin.login.submit');
+
+// Admin logout
+Route::post('/admin/logout', function () {
+    Session::forget('admin_authenticated');
+    Session::forget('admin_username');
+    return redirect()->route('admin.login')->with('success', 'Излязохте от системата.');
+})->name('admin.logout');
+
+// Admin dashboard - protected
+Route::get('/admin/dashboard', function (\Illuminate\Http\Request $request) {
+    $filter = $request->query('filter');
+    
+    $query = ContactSubmission::orderBy('created_at', 'desc');
+    
+    if ($filter === 'unread') {
+        $query->where('is_read', false);
+    } elseif ($filter === 'read') {
+        $query->where('is_read', true);
+    }
+    
+    $submissions = $query->paginate(20);
+    $total = ContactSubmission::count();
+    $unread = ContactSubmission::where('is_read', false)->count();
+    $read = ContactSubmission::where('is_read', true)->count();
+    
+    return view('admin.dashboard', compact('submissions', 'total', 'unread', 'read'));
+})->middleware('admin.auth')->name('admin.dashboard');
+
+// View submission detail
+Route::get('/admin/submission/{id}', function ($id) {
+    $submission = ContactSubmission::findOrFail($id);
+    return view('admin.submission', compact('submission'));
+})->middleware('admin.auth')->name('admin.submission.view');
+
+// Mark submission as read
+Route::post('/admin/submission/{id}/mark-read', function ($id) {
+    $submission = ContactSubmission::findOrFail($id);
+    $submission->markAsRead();
+    return back()->with('success', 'Запитването е маркирано като прочетено.');
+})->middleware('admin.auth')->name('admin.submission.mark-read');
+
+// Delete submission
+Route::delete('/admin/submission/{id}', function ($id) {
+    $submission = ContactSubmission::findOrFail($id);
+    $submission->delete();
+    return redirect()->route('admin.dashboard')->with('success', 'Запитването е изтрито успешно.');
+})->middleware('admin.auth')->name('admin.submission.delete');
+
+// ========================================
+// PUBLIC ROUTES
+// ========================================
 
 Route::get('/locale/{locale}', function ($locale) {
     if (in_array($locale, ['bg', 'en'])) {
@@ -151,37 +235,41 @@ Route::post('/contact', function (\Illuminate\Http\Request $request) {
     $messages = [
         'bg' => [
             'name.required' => 'Полето Име е задължително.',
+            'name.min' => 'Името трябва да съдържа поне 2 знака.',
             'name.max' => 'Името не може да бъде повече от 255 знака.',
-            'name.regex' => 'Името може да съдържа само букви и интервали.',
+            'name.regex' => 'Името може да съдържа само букви, интервали, тире и апостроф.',
             'email.required' => 'Полето Имейл е задължително.',
-            'email.email' => 'Моля, въведете валиден имейл адрес.',
+            'email.email' => 'Моля, въведете валиден имейл адрес (напр. example@domain.com).',
             'email.max' => 'Имейлът не може да бъде повече от 255 знака.',
-            'phone.max' => 'Телефонът не може да бъде повече от 255 знака.',
-            'phone.regex' => 'Моля, въведете валиден телефонен номер.',
+            'phone.min' => 'Телефонният номер трябва да съдържа поне 6 цифри.',
+            'phone.max' => 'Телефонът не може да бъде повече от 20 знака.',
+            'phone.regex' => 'Моля, въведете валиден телефонен номер (напр. +359 888 123 456).',
             'message.required' => 'Полето Съобщение е задължително.',
-            'message.max' => 'Съобщението не може да бъде повече от 2000 знака.',
             'message.min' => 'Съобщението трябва да съдържа поне 10 знака.',
+            'message.max' => 'Съобщението не може да бъде повече от 2000 знака.',
         ],
         'en' => [
             'name.required' => 'The Name field is required.',
+            'name.min' => 'The name must be at least 2 characters.',
             'name.max' => 'The name may not be greater than 255 characters.',
-            'name.regex' => 'The name may only contain letters and spaces.',
+            'name.regex' => 'The name may only contain letters, spaces, hyphens and apostrophes.',
             'email.required' => 'The Email field is required.',
-            'email.email' => 'Please enter a valid email address.',
+            'email.email' => 'Please enter a valid email address (e.g. example@domain.com).',
             'email.max' => 'The email may not be greater than 255 characters.',
-            'phone.max' => 'The phone may not be greater than 255 characters.',
-            'phone.regex' => 'Please enter a valid phone number.',
+            'phone.min' => 'The phone number must contain at least 6 digits.',
+            'phone.max' => 'The phone may not be greater than 20 characters.',
+            'phone.regex' => 'Please enter a valid phone number (e.g. +359 888 123 456).',
             'message.required' => 'The Message field is required.',
-            'message.max' => 'The message may not be greater than 2000 characters.',
             'message.min' => 'The message must contain at least 10 characters.',
+            'message.max' => 'The message may not be greater than 2000 characters.',
         ]
     ];
     
     $validator = Validator::make($request->all(), [
-        'name' => ['required', 'string', 'max:255', 'min:2', 'regex:/^[\p{L}\s\-\']+$/u'],
+        'name' => ['required', 'string', 'min:2', 'max:255', 'regex:/^[\p{L}\s\-\']+$/u'],
         'email' => ['required', 'email:rfc,dns', 'max:255'],
-        'phone' => ['nullable', 'string', 'max:20', 'regex:/^[\d\s\+\-\(\)]+$/'],
-        'message' => ['required', 'string', 'max:2000', 'min:10'],
+        'phone' => ['nullable', 'string', 'min:6', 'max:20', 'regex:/^[\d\s\+\-\(\)]+$/'],
+        'message' => ['required', 'string', 'min:10', 'max:2000'],
     ], $messages[$locale] ?? $messages['bg']);
 
     if ($validator->fails()) {
@@ -223,28 +311,21 @@ Route::post('/contact', function (\Illuminate\Http\Request $request) {
                 ->with('error', __('Невалидни данни. Моля, опитайте отново.'));
         }
         
-        $data = [
+        // Save to database instead of sending email
+        ContactSubmission::create([
             'name' => $name,
             'email' => $email,
-            'phone' => $phone ?: __('Не е посочен'),
-            'messageContent' => $messageContent,
-            'timestamp' => now()->format('d.m.Y H:i:s'),
-            'ip' => $request->ip(),
-        ];
-
-        // Изпращане на имейл с HTML template към COMPANY_EMAIL
-        // Не задаваме from() експлицитно - оставяме Laravel да използва MAIL_FROM_ADDRESS
-        Mail::send('emails.contact', $data, function ($message) use ($data) {
-            $message->to(config('app.company.email'))
-                ->subject('Ново съобщение от ' . $data['name'])
-                ->replyTo($data['email'], $data['name']);
-        });
+            'phone' => $phone,
+            'message' => $messageContent,
+            'ip_address' => $request->ip(),
+            'is_read' => false,
+        ]);
 
         // Log successful submission
         Log::info('Contact form submitted successfully', [
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'ip' => $data['ip'],
+            'name' => $name,
+            'email' => $email,
+            'ip' => $request->ip(),
         ]);
 
         return redirect()->route('contact')->with('success', __('Съобщението е изпратено успешно!'));
@@ -269,4 +350,5 @@ Route::post('/contact', function (\Illuminate\Http\Request $request) {
             ->withInput();
     }
 })->name('contact.submit')->middleware('throttle:5,1'); // Max 5 submissions per minute
+
 
