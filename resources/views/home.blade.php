@@ -208,7 +208,8 @@
     </div>
 </section>
 
-<!-- Partners Section -->
+<!-- Partners Section - Temporarily hidden per client request -->
+@if(false)
 <section class="partners-section py-16 sm:py-24 md:py-32 bg-slate-900 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.08),transparent_70%)]"></div>
@@ -292,5 +293,6 @@
         </div>
     </div>
 </section>
+@endif
 @endsection
 
