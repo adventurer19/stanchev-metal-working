@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', __('За нас | Прецизна металообработка | Станчев и Син 2025'))
-@section('description', __('Запознайте се с нашия опит в металообработката. Специализирани услуги, модерно оборудване, портфолио с проекти и доверени партньори в България.'))
-@section('keywords', __('за нас, портфолио металообработка, услуги заваряване, ЦНЦ машини, фирма за металообработка'))
+@section('title', __('За нас | Станчев и Син | Металообработка Габрово'))
+@section('description', __('Станчев и Син - семеен бизнес с 15+ години опит в прецизната металообработка. Модерно оборудване, CNC машини, индивидуални проекти. Габрово, България.'))
+@section('keywords', __('Станчев и Син, за нас, металообработка Габрово, CNC обработка, прецизни детайли, семеен бизнес'))
 
 @section('content')
     <!-- Hero Section -->
@@ -262,14 +262,14 @@
                         </div>
                     @endif
                     
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-stretch">
                     @foreach($products as $index => $product)
                         <!-- Product Library Card -->
                         <div onclick="openProductGallery({{ $index }}, 0)"
-                             class="card-library group cursor-pointer relative overflow-hidden bg-gradient-to-br from-slate-800/60 via-slate-900/60 to-slate-900/80 border-2 border-slate-700/50 hover:border-accent-500/70 transition-all duration-700 shadow-2xl hover:shadow-accent-500/30 hover:scale-[1.02] rounded-sm">
+                             class="card-library group cursor-pointer relative overflow-hidden bg-gradient-to-br from-slate-800/60 via-slate-900/60 to-slate-900/80 border-2 border-slate-700/50 hover:border-accent-500/70 transition-all duration-700 shadow-2xl hover:shadow-accent-500/30 hover:scale-[1.02] rounded-sm h-full flex flex-col">
                             
                             <!-- Main Product Image -->
-                            <div class="aspect-[4/3] overflow-hidden relative">
+                            <div class="aspect-[4/3] overflow-hidden relative flex-shrink-0">
                                 <img src="{{ asset($product['thumbnail']) }}"
                                      alt="{{ $product['name'] }}"
                                      class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110">
@@ -280,7 +280,7 @@
                                 <!-- Category Badge (Bottom Left) -->
                                 <div class="absolute bottom-4 left-4 transform group-hover:translate-x-1 transition-transform duration-500">
                                     <div class="px-4 py-2.5 bg-gradient-to-r from-slate-800/95 via-slate-700/95 to-slate-800/95 backdrop-blur-md border border-accent-500/30 rounded-sm shadow-lg">
-                                        <span class="text-white text-sm font-bold uppercase tracking-wider drop-shadow-lg">{{ __(ucfirst(str_replace('-', ' ', $product['name']))) }}</span>
+                                        <span class="text-white text-sm font-bold uppercase tracking-wider drop-shadow-lg">{{ __($product['name']) }}</span>
                                     </div>
                                 </div>
                                 
@@ -289,32 +289,30 @@
                             </div>
                             
                             <!-- Card Content -->
-                            <div class="p-6 md:p-8 flex flex-col">
-                                <!-- Title - Fixed Height Area -->
-                                <div class="flex items-start gap-4 min-h-[100px] mb-4">
+                            <div class="p-6 md:p-8 flex flex-col flex-1">
+                                <!-- Title Area -->
+                                <div class="flex items-start gap-4 flex-1">
                                     <div class="w-12 h-12 bg-gradient-to-br from-accent-500/20 to-accent-600/20 rounded-sm flex items-center justify-center border border-accent-500/30 flex-shrink-0 group-hover:from-accent-500/30 group-hover:to-accent-600/30 transition-all duration-500">
                                         <svg class="w-6 h-6 text-accent-400 group-hover:text-accent-300 transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                         </svg>
                                     </div>
                                     <div class="flex-1">
-                                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-accent-300 transition-colors duration-500">
-                                            {{ __(ucfirst(str_replace('-', ' ', $product['name']))) }}
+                                        <h3 class="text-lg md:text-xl font-bold text-white mb-2 group-hover:text-accent-300 transition-colors duration-500">
+                                            {{ __($product['name']) }}
                                         </h3>
-                                        <p class="text-slate-400 text-sm md:text-base group-hover:text-slate-300 transition-colors duration-500">
+                                        <p class="text-slate-400 text-sm group-hover:text-slate-300 transition-colors duration-500">
                                             {{ __('Прецизна изработка с високо качество') }}
                                         </p>
                                     </div>
                                 </div>
                                 
-                                <!-- Action Button - Always at Bottom -->
-                                <div class="mt-auto">
-                                    <div class="inline-flex items-center gap-2 text-accent-400 group-hover:text-accent-300 text-sm md:text-base font-semibold transition-all duration-500">
-                                        <span>{{ __('Разгледай галерията') }}</span>
-                                        <svg class="w-5 h-5 transition-transform group-hover:translate-x-2 duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                                        </svg>
-                                    </div>
+                                <!-- Action Button - Always at bottom -->
+                                <div class="inline-flex items-center gap-2 text-accent-400 group-hover:text-accent-300 text-sm md:text-base font-semibold transition-all duration-500 mt-6">
+                                    <span>{{ __('Разгледай галерията') }}</span>
+                                    <svg class="w-5 h-5 transition-transform group-hover:translate-x-2 duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                    </svg>
                                 </div>
                             </div>
                             

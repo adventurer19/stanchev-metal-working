@@ -109,16 +109,23 @@ Route::get('/', function () {
 
 // About page (combines About and Portfolio)
 Route::get('/about', function () {
-    // Get products from image-products directory
     $productsDir = public_path('image-products');
     $products = [];
+    
+    $productNames = [
+        'opakovani-produkti' => 'Опаковани продукти',
+        'gotovi-detaili' => 'Готови детайли',
+        'rezbovi-detaili' => 'Резбови детайли',
+    ];
+    
+    $productOrder = ['opakovani-produkti', 'gotovi-detaili', 'rezbovi-detaili'];
     
     if (is_dir($productsDir)) {
         $dirs = array_filter(glob($productsDir . '/*'), 'is_dir');
         
         foreach ($dirs as $dir) {
-            $productName = basename($dir);
-            // GLOB_BRACE is not available in PHP 8.0+, so we use multiple glob patterns
+            $productSlug = basename($dir);
+            
             $images = array_merge(
                 glob($dir . '/*.jpg'),
                 glob($dir . '/*.jpeg'),
@@ -131,13 +138,16 @@ Route::get('/about', function () {
             );
             
             if (!empty($images)) {
-                // Get first image as thumbnail
+                sort($images);
+                
                 $thumbnail = str_replace(public_path(), '', $images[0]);
                 $thumbnail = ltrim($thumbnail, '/');
                 
-                $products[] = [
-                    'slug' => $productName,
-                    'name' => ucfirst(str_replace('-', ' ', $productName)),
+                $displayName = $productNames[$productSlug] ?? ucfirst(str_replace('-', ' ', $productSlug));
+                
+                $products[$productSlug] = [
+                    'slug' => $productSlug,
+                    'name' => $displayName,
                     'thumbnail' => $thumbnail,
                     'imageCount' => count($images),
                     'images' => array_map(function($img) {
@@ -146,6 +156,19 @@ Route::get('/about', function () {
                 ];
             }
         }
+        
+        $sortedProducts = [];
+        foreach ($productOrder as $slug) {
+            if (isset($products[$slug])) {
+                $sortedProducts[] = $products[$slug];
+            }
+        }
+        foreach ($products as $slug => $product) {
+            if (!in_array($slug, $productOrder)) {
+                $sortedProducts[] = $product;
+            }
+        }
+        $products = $sortedProducts;
     }
     
     return view('about', ['products' => $products]);
